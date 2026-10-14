@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Disaster Ready, Barangay Ampayon</title>
+  <meta name="description" content="Disaster Ready resident portal for Barangay Ampayon, Butuan City.">
+  <link rel="icon" href="assets/icons/logo.svg" type="image/svg+xml">
+
+  <!-- Fonts from Google Fonts. Needs internet; without it the page falls back to Segoe UI / Arial. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@800&display=swap">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page">
+
+  <!-- ===== Top bar ===== -->
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22S20 18 20 10V5l-8-3-8 3v5c0 8 8 12 8 12Z"/><path d="m9 12 2 2 4-5"/></svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Disaster Ready</span>
+        <span class="brand-place">Barangay Ampayon<span class="brand-city"> · Butuan City</span></span>
+      </span>
+    </a>
+
+    <!-- Staff login page is not built yet (see docs/checklist.md) -->
+    <button type="button" class="btn btn-small" data-not-built="The barangay staff login page">
+      <span class="label-long">Barangay staff login</span>
+      <span class="label-short">Staff login</span>
+    </button>
+  </header>
+
+  <main class="login-layout">
+
+    <!-- ===== Left side: welcome message and current advisory ===== -->
+    <section class="intro" aria-labelledby="page-title">
+      <p class="chip chip-warning">Yellow rainfall advisory active</p>
+      <h1 id="page-title">One community.<br>Ready for anything.</h1>
+      <p class="lead">Get official alerts, manage your household profile, find evacuation centers, and request emergency assistance.</p>
+
+      <!-- SAMPLE ADVISORY: placeholder text for the prototype.
+           Later this will show the latest alert posted by barangay staff. -->
+      <div class="alert alert-warning">
+        <span class="alert-icon" aria-hidden="true">!</span>
+        <div class="alert-body">
+          <p class="alert-title">Moderate to heavy rainfall expected</p>
+          <p class="alert-text">Residents near waterways should prepare to evacuate. Issued 20 minutes ago.</p>
+        </div>
+        <span class="sample-tag">Sample</span>
+      </div>
+
+      <div class="quick-links">
+        <button type="button" class="link-button" data-not-built="The evacuation centers page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z"/><path d="M9 3v15m6-12v15"/></svg>
+          Evacuation centers
+        </button>
+        <button type="button" class="link-button" data-not-built="The emergency hotlines page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22S20 18 20 10V5l-8-3-8 3v5c0 8 8 12 8 12Z"/><path d="m9 12 2 2 4-5"/></svg>
+          Emergency hotlines
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== Right side: sign-in and registration card ===== -->
+    <section class="auth-card" aria-label="Resident access">
+
+      <!-- Form 1: Sign in (shown first) -->
+      <form id="signin-form" class="auth-form" novalidate>
+        <p class="eyebrow">Resident access</p>
+        <h2 tabindex="-1">Welcome back</h2>
+        <p class="form-intro">Sign in with your registered mobile number.</p>
+
+        <div class="field">
+          <label for="signin-mobile">Mobile number</label>
+          <div class="input-group">
+            <span class="input-prefix">+63</span>
+            <input id="signin-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="917 123 4567" aria-describedby="signin-mobile-error">
+          </div>
+          <p class="field-error" id="signin-mobile-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="signin-password">Password</label>
+          <input id="signin-password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" aria-describedby="signin-password-error">
+          <p class="field-error" id="signin-password-error"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Sign in to citizen portal
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        </button>
+        <p class="form-status" role="status"></p>
+
+        <p class="switch-text">
+          New to Disaster Ready?
+          <button type="button" class="link-button" data-show="register">Create an account</button>
+        </p>
+      </form>
+
+      <!-- Form 2: Create an account (hidden until "Create an account" is clicked) -->
+      <form id="register-form" class="auth-form" novalidate hidden>
+        <p class="eyebrow">Resident access</p>
+        <h2 tabindex="-1">Create your account</h2>
+        <p class="form-intro">Register your household with Barangay Ampayon.</p>
+
+        <div class="field">
+          <label for="register-name">Full name</label>
+          <input id="register-name" name="fullName" type="text" autocomplete="name" placeholder="Juan Dela Cruz" aria-describedby="register-name-error">
+          <p class="field-error" id="register-name-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="register-mobile">Mobile number</label>
+          <div class="input-group">
+            <span class="input-prefix">+63</span>
+            <input id="register-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="917 123 4567" aria-describedby="register-mobile-error">
+          </div>
+          <p class="field-error" id="register-mobile-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="register-password">Create password</label>
+          <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="••••••••" aria-describedby="register-password-hint register-password-error">
+          <p class="field-hint" id="register-password-hint">Use at least 8 characters.</p>
+          <p class="field-error" id="register-password-error"></p>
+        </div>
+
+        <div class="field">
+          <!-- Purok 1 to 8 comes from the prototype. Confirm the real list with the group. -->
+          <label for="register-purok">Home address (Purok)</label>
+          <select id="register-purok" name="purok" aria-describedby="register-purok-error">
+            <option value="">Select your Purok</option>
+            <option value="1">Purok 1</option>
+            <option value="2">Purok 2</option>
+            <option value="3">Purok 3</option>
+            <option value="4">Purok 4</option>
+            <option value="5">Purok 5</option>
+            <option value="6">Purok 6</option>
+            <option value="7">Purok 7</option>
+            <option value="8">Purok 8</option>
+          </select>
+          <p class="field-error" id="register-purok-error"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Register household
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+        </button>
+        <p class="form-status" role="status"></p>
+
+        <p class="switch-text">
+          Already registered?
+          <button type="button" class="link-button" data-show="signin">Sign in</button>
+        </p>
+      </form>
+
+      <p class="prototype-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22S20 18 20 10V5l-8-3-8 3v5c0 8 8 12 8 12Z"/><path d="m9 12 2 2 4-5"/></svg>
+        Prototype: the forms check your details but do not sign in or save anything yet.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Small pop-up message at the bottom of the screen -->
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

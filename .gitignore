@@ -1,0 +1,20 @@
+# Files Git should never upload to GitHub
+
+# Node.js packages (anyone can reinstall them with "npm install")
+node_modules/
+
+# Secret settings: passwords, database logins, SMS API keys.
+# Keep them in a .env file on your own computer only.
+.env
+.env.*
+!.env.example
+
+# Logs and system files
+*.log
+npm-debug.log*
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Personal VS Code settings
+.vscode/
