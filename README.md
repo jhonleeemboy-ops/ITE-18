@@ -42,7 +42,9 @@ ITE-18
 └── docs
     ├── project-status.md       What exists, tools, blockers, decisions needed
     ├── checklist.md            Phase checklist and group task list
-    ├── group-notes.md          Members, roles, links and what the group agreed in chat
+    ├── group-notes.md          Members, roles, deadlines, links and what the group agreed in chat
+    ├── thesis-requirements.md  What the paper template requires from the system and Chapter 3
+    ├── ai-use-log.md           Record of AI/tools used, for the paper's Declaration page
     ├── prototype-notes.md      What each Figma screen contains, design colors and fonts
     ├── test-cases.md           What was tested and the results
     └── screenshots
