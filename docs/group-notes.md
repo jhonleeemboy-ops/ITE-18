@@ -56,7 +56,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 - **Frontend framework:** Jhann suggested plain HTML/CSS/JS, but Svelte and Vue videos are also pinned. The group should confirm which one, because the login page is already built in plain HTML/CSS/JS.
 - **Database:** not mentioned yet (for example MySQL or SQLite). Jhon Lee decides, ideally with the ERD.
 - **Hosting:** the system must be online by Nov 20, so the backend and database need a host. Not discussed yet.
-- **Name spelling:** the template says "Jhan Clevill", while Messenger and the commits say "Jhann Clevill". Confirm which one is correct.
+- **Name spelling:** the correct spelling is "Jhann Clevill" (confirmed 2026-10-20). The paper's title page still says "Jhan" and needs fixing.
 - System roles for Marc Joven and John Humphrey (integration, testing, SMS research, barangay data).
 - What's in the BACKEND Drive folder.
 - What Dec 7 is for.
