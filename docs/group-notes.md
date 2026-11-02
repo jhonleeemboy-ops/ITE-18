@@ -19,7 +19,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 |---|---|
 | Paper soft copy | **November 19, 2026** |
 | Link of the working system | **November 20, 2026, 11:59 PM** (the submission link closes after that) |
-| Dec 7 | Entered in the shared sheet by Jhon Lee. Purpose not recorded yet. |
+| Presentation + individual debugging | **Nov 23 to Dec 15, 2026** (instructor). Our slot is most likely **Dec 7**, the date Jhon Lee entered in the scheduling sheet. |
 
 ## Shared links
 
@@ -50,13 +50,20 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Sat 2026-10-17 | Paper split | Ch 1 Marc Joven, Ch 2 John Humphrey, Ch 3 Jhann Clevill + Jhon Lee. Drafts first. |
 | Sun 2026-10-18 | Title | Confirmed final (Jhon Lee: "oo") |
 | Sun 2026-10-18 | Ch 1 evidence | Marc Joven asked whether the creek in Ampayon overflows during typhoons. Not answered yet. |
+| Thu 2026-10-22 | Work split | Jhon Lee would rather do the backend alone, but everyone must build parts of both the backend and the frontend. |
+| Thu 2026-10-22 | **Framework required** | The instructor said plain HTML/CSS/JS isn't enough: we must use a framework such as **Vue**. |
+| Thu 2026-10-22 | Tools | Everyone installs **Laragon** (tutorial pinned in the group chat). |
+| Mon 2026-10-26 | Code split | Jhon Lee: the coding parts haven't been divided yet. |
+| Sat 2026-10-31 | Pace | Jhon Lee: don't cram, help each other so everyone can answer the instructor's questions, aim for a little progress every day. Jhann: "hinay hinayon", start **next week** (week of Nov 2). |
 
 ## Still unclear
 
-- **Frontend framework:** Jhann suggested plain HTML/CSS/JS, but Svelte and Vue videos are also pinned. The group should confirm which one, because the login page is already built in plain HTML/CSS/JS.
-- **Database:** not mentioned yet (for example MySQL or SQLite). Jhon Lee decides, ideally with the ERD.
+- **Frontend framework:** a framework is required (instructor, Oct 22). Vue is the likely choice, but the group should confirm it. The login page has to move from plain HTML/CSS/JS to it.
+- **Backend language:** Node.js was agreed on Oct 11, but Laragon is mostly used for PHP/Laravel + MySQL. Confirm with Jhon Lee.
+- **Database:** probably MySQL (comes with Laragon). Confirm with the ERD.
 - **Hosting:** the system must be online by Nov 20, so the backend and database need a host. Not discussed yet.
 - **Name spelling:** the correct spelling is "Jhann Clevill" (confirmed 2026-10-20). The paper's title page still says "Jhan" and needs fixing.
 - System roles for Marc Joven and John Humphrey (integration, testing, SMS research, barangay data).
 - What's in the BACKEND Drive folder.
-- What Dec 7 is for.
+- Who writes **Chapter 4 and Chapter 5**. They're in the instructor's template but missing from our Google Doc copy.
+- What the instructor's "Finals Requirements" video says (not reviewed here).

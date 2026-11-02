@@ -2,12 +2,33 @@
 
 Summary of "ITE18_Mini-Thesis_Paper_Template.docx" (ITE 18, Applications Development and Emerging Technologies), focused on what affects the **system** and **Chapter 3**. Read the full template before writing.
 
-## Deadlines
+## Deadlines (instructor announcement, Oct 15)
 
 - Paper soft copy: **November 19, 2026**
-- Link of the working system: **November 20, 2026, 11:59 PM** (the link closes afterwards)
+- Link of the functional and usable system: **November 20, 2026, 11:59 PM** (the link closes afterwards)
+- Presentation of the final project + **individual hands-on debugging**: **November 23 to December 15, 2026**. Our slot is most likely **Dec 7** (the date Jhon Lee entered in the scheduling sheet).
 
 **The system must be online (deployed), not just running on a laptop.**
+
+Instructor's materials (Oct 8 post): "ITE18 Finals Requirements" video (18 min), "Final Project_Monitoring" sheet, the paper template, and the project rubrics. The video and the sheet haven't been reviewed here.
+
+## How we are graded (ITE18 Project Rubrics)
+
+| Part | Weight | Scored for | What matters most |
+|---|---|---|---|
+| A. Research paper | 15% | Group | Real evidence from Ampayon, measurable objectives, real users, 10+ sources, testable requirements, honest results, **AI use fully declared** |
+| B. System | 30% | Group | All "Must" requirements work end to end for every role; clean backend structure; database with keys/constraints/migrations/seed data; RESTful API with docs; SMS API that handles failures; server-side login + roles, hashed passwords, secrets in env variables; usability tested with real users (e.g. SUS); test cases + Postman tests + defect log; deployed link + README + user manual; **regular commits from every member** |
+| C. Presentation and defense | 20% | Group + individual | Live demo for each role (main flow, one error path, backend side); **each member explains their own code**; every member presents |
+| D. Hands-on debugging | **35%** | **Individual** | Each member fixes planted bugs in a backend during a timed exam: reproduce, use Postman/logs/database queries, fix the root cause, retest, write a bug log |
+
+**The biggest single part (35%) is individual backend debugging.** Every member needs to understand the backend, not just Jhon Lee. Grades are adjusted per person using the GitHub history and Appendix I.
+
+## Our copy of the paper is missing two chapters
+
+The instructor's template has **Chapter 4 (Results and Discussion)** and **Chapter 5 (Summary, Conclusions and Recommendations)**. The group's Google Doc copy stops after Chapter 3, so these need to be added and assigned.
+
+- Ch 4: 4.1 the developed system (screenshots per module, requirement IDs, deployed link, demo accounts), 4.2 traceability table (requirement → module/endpoint → test case → status), 4.3 testing results (pass/fail counts, defects and fixes), 4.4 user evaluation results (mean, SD, interpretation), 4.5 discussion per objective, 4.6 limitations
+- Ch 5: 5.1 summary of findings, 5.2 one conclusion per objective, 5.3 recommendations
 
 ## Structure of the paper
 
