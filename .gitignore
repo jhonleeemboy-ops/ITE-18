@@ -21,3 +21,9 @@ desktop.ini
 
 # Private notes (full names, personal info). Never upload.
 private/
+
+# Personal Claude context (full names, personal setup). Never upload.
+CLAUDE.md
+
+# Browser test leftovers
+.playwright-mcp/
