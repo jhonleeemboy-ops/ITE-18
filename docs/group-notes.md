@@ -54,13 +54,16 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Thu 2026-10-22 | **Framework required** | The instructor said plain HTML/CSS/JS isn't enough: we must use a framework such as **Vue**. |
 | Thu 2026-10-22 | Tools | Everyone installs **Laragon** (tutorial pinned in the group chat). |
 | Mon 2026-10-26 | Code split | Jhon Lee: the coding parts haven't been divided yet. |
+| Tue 2026-11-03 | **Architecture** | Jhon Lee's diagram: Barangay Staff Dashboard → Laravel backend/API (logic + security) → MySQL "System Records" + SMS API → residents' phones. Jhann suggested the label "System Records" (covers evacuation and relief, not only households), and Jhon Lee changed it. |
+| Tue 2026-11-03 | **Stack** | **Laravel + MySQL** backend. Jhann asked about Vue for the dashboard, and Jhon Lee said OK. The diagram still says "HTML / CSS / JavaScript" for the dashboard. |
+| Tue 2026-11-03 | **CSS** | Tailwind is optional. Decided: **plain external CSS files**, because everyone is more familiar with them and they're easier to debug. |
 | Sat 2026-10-31 | Pace | Jhon Lee: don't cram, help each other so everyone can answer the instructor's questions, aim for a little progress every day. Jhann: "hinay hinayon", start **next week** (week of Nov 2). |
 
 ## Still unclear
 
 - **Frontend framework:** a framework is required (instructor, Oct 22). Vue is the likely choice, but the group should confirm it. The login page has to move from plain HTML/CSS/JS to it.
-- **Backend language:** Node.js was agreed on Oct 11, but Laragon is mostly used for PHP/Laravel + MySQL. Confirm with Jhon Lee.
-- **Database:** probably MySQL (comes with Laragon). Confirm with the ERD.
+- **Resident portal or staff only?** The architecture diagram shows only a **Barangay Staff Dashboard**, with residents getting SMS. Our login page is a resident login + registration. Confirm whether residents still sign in to a portal.
+- The diagram labels the dashboard "HTML / CSS / JavaScript". It should say Vue, since a framework is required.
 - **Hosting:** the system must be online by Nov 20, so the backend and database need a host. Not discussed yet.
 - **Name spelling:** the correct spelling is "Jhann Clevill" (confirmed 2026-10-20). The paper's title page still says "Jhan" and needs fixing.
 - System roles for Marc Joven and John Humphrey (integration, testing, SMS research, barangay data).
