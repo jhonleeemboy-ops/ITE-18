@@ -24,6 +24,10 @@ A box is ticked only after the item has been checked and works. See [test-cases.
   - [ ] Jhon Lee pulls the repo before pushing the backend
 - [ ] Get the group's answers on the other open decisions
 
+- Development setup on Jhann Clevill's PC:
+  - [x] Laragon 8.8 installed (PHP 8.3, MySQL 8.4, Composer 2.10), tested 2026-11-04
+  - [x] School GitHub account logged in again on this PC (2026-11-04; the work account stays active, and this repo always pushes as `kuanjankalin-ITE18`)
+
 ## Phase 2: Frontend foundation
 
 - [x] Shared styles: colors, fonts, header, buttons, form fields (`frontend/css/base.css`)
