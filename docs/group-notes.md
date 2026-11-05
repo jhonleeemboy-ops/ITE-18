@@ -59,6 +59,9 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Tue 2026-11-03 | **CSS** | Tailwind is optional. Decided: **plain external CSS files**, because everyone is more familiar with them and they're easier to debug. |
 | Thu 2026-11-05 | **Resident portal: yes** | Jhon Lee: there is a portal for residents ("naa sa residents"). So the system has a **resident portal** (sign in + register, our login page) **and** a **staff dashboard** (separate staff login). |
 | Thu 2026-11-05 | **ERD v1 received** | 7 tables: households, users, incidents, incident_notes, advisories, evacuation_centers, emergency_contacts. Review and suggestions: [erd-review.md](erd-review.md). Main gaps: no relief tables, no password/mobile on users, no SMS log. |
+| Fri 2026-11-06 | **Data gathering** | Jhon Lee can't join tomorrow (errand for another thesis), so he asked **Marc Joven and John Humphrey** to go to **Ampayon Barangay Hall** (map pinned). He made **two surveys**, one for **residents** and one for **barangay officials**, with a Bisaya version so people understand the questions. |
+| Fri 2026-11-06 | Frontend ↔ backend | Jhon Lee asked Jhann for an update on the frontend. Once features are complete he'll add the backend API, and the form inputs must match the database. Answer: [frontend-data-fields.md](frontend-data-fields.md). |
+| Fri 2026-11-06 | Paper | After data gathering, aim to draft **Ch 1–3 next week**. Methods are decided; the user feedback is needed to validate the problems. |
 | Sat 2026-10-31 | Pace | Jhon Lee: don't cram, help each other so everyone can answer the instructor's questions, aim for a little progress every day. Jhann: "hinay hinayon", start **next week** (week of Nov 2). |
 
 ## Still unclear
