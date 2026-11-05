@@ -27,3 +27,6 @@ CLAUDE.md
 
 # Browser test leftovers
 .playwright-mcp/
+
+# Built frontend files (recreate with "npm run build")
+dist/

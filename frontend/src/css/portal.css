@@ -1,0 +1,142 @@
+/* =========================================================
+   Resident portal layout: header, top menu, page area
+   ========================================================= */
+
+.portal-header {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #dee8e5;
+}
+
+.portal-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 14px 24px 8px;
+}
+
+.portal-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e0f1ee;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--teal);
+}
+
+/* Top menu: scrolls sideways on small phones instead of breaking the layout */
+.portal-nav {
+  display: flex;
+  gap: 4px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 16px;
+  overflow-x: auto;
+}
+
+.portal-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 10px;
+  border-bottom: 3px solid transparent;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--label);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.portal-nav a:hover {
+  color: var(--ink);
+}
+
+/* RouterLink adds this class to the link of the page you're on */
+.portal-nav a.router-link-active {
+  border-bottom-color: var(--teal);
+  color: var(--teal);
+}
+
+.portal-main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 24px 24px 56px;
+}
+
+/* Big advisory box on the Home page */
+.hero-alert {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 24px;
+  border: 1px solid var(--amber-line);
+  border-radius: var(--radius-lg);
+  background: var(--amber-bg);
+}
+
+.hero-alert .alert-icon {
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+}
+
+.hero-alert h2 {
+  margin: 4px 0 6px;
+  font-size: clamp(22px, 2.6vw, 26px);
+  color: var(--amber-title);
+}
+
+.hero-alert p {
+  color: var(--amber-text);
+}
+
+.hero-alert .hero-alert-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--amber-chip-text);
+}
+
+@media (max-width: 640px) {
+  .portal-header-inner {
+    padding: 12px 16px 6px;
+  }
+
+  .portal-user-name {
+    display: none;
+  }
+
+  .portal-main {
+    padding: 18px 16px 48px;
+  }
+
+  /* Hide the scrollbar and fade the right edge, a hint that the menu scrolls sideways */
+  .portal-nav {
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, #000 82%, transparent);
+  }
+
+  .portal-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-alert {
+    flex-direction: column;
+    padding: 20px;
+  }
+}

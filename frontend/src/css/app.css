@@ -1,0 +1,502 @@
+/* =========================================================
+   Shared pieces for the portal and dashboard pages:
+   cards, stats, badges, tables, lists, meters.
+   Colors come from the tokens in base.css.
+   ========================================================= */
+
+/* ---------- Icons and links ---------- */
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+a.link-button {
+  text-decoration: none;
+}
+
+a.link-button:hover {
+  text-decoration: underline;
+}
+
+.btn-outline {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 14.5px;
+  color: var(--teal);
+  background: var(--surface);
+  border-color: #b9d8d1;
+}
+
+.btn-outline:hover {
+  border-color: var(--teal);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.button-row.no-margin {
+  margin-top: 0;
+}
+
+/* ---------- Sample data banner ---------- */
+.sample-banner {
+  margin-bottom: 20px;
+  padding: 10px 14px;
+  border: 1px dashed var(--amber-line);
+  border-radius: var(--radius-sm);
+  background: var(--amber-bg);
+  font-size: 14px;
+  color: var(--amber-title);
+}
+
+.sample-banner strong {
+  color: var(--amber-chip-text);
+}
+
+/* ---------- Page heading ---------- */
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 20px;
+}
+
+.page-head h1 {
+  font-size: clamp(26px, 3vw, 32px);
+  line-height: 1.2;
+}
+
+.page-head p {
+  margin-top: 4px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.page-head .eyebrow {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--teal);
+}
+
+.page-subtitle {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.section-gap {
+  margin-top: 16px;
+}
+
+.section-gap-bottom {
+  margin-bottom: 16px;
+}
+
+/* ---------- Layout grids ---------- */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* ---------- Cards ---------- */
+.card {
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid #dce7e4;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 6px 18px rgba(28, 77, 67, 0.06);
+}
+
+.card h2 {
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 12px;
+}
+
+.card-head p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.card-link:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 10px 24px rgba(28, 77, 67, 0.1);
+}
+
+.card-kicker {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.card-title {
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+/* ---------- Stat cards (big number + label) ---------- */
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.stat-label {
+  margin-top: 4px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.stat-note {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- Badges (status labels) ---------- */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  text-transform: capitalize;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge-green { background: #e3f4ee; color: #0b6b52; }
+.badge-teal { background: #e0f0f3; color: #1b5e6e; }
+.badge-amber { background: var(--amber-chip); color: var(--amber-chip-text); }
+.badge-red { background: #fde8e6; color: #a1261b; }
+.badge-gray { background: #edf1f0; color: var(--label); }
+
+/* ---------- Lists ---------- */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #edf2f0;
+}
+
+.list li:last-child {
+  border-bottom: 0;
+}
+
+.list-title {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.list-text {
+  margin-top: 2px;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+.list-meta {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.note,
+.muted {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.note {
+  margin-top: 14px;
+}
+
+/* Emergency contact rows */
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #e0f1ee;
+  color: var(--teal);
+}
+
+.contact-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-phone {
+  font-weight: 800;
+  color: var(--teal);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.contact-phone.is-pending {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ---------- Details list (label + value pairs) ---------- */
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  margin: 0;
+}
+
+.details dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.details dd {
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ---------- Evacuation center pieces ---------- */
+.center-row,
+.assigned-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  margin-bottom: 8px;
+}
+
+.center-row .card-title {
+  margin-bottom: 0;
+}
+
+.assigned-head h2 {
+  font-size: clamp(20px, 2.4vw, 24px);
+}
+
+/* Occupancy bar */
+.meter-wrap {
+  margin-top: 6px;
+}
+
+.meter-text {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.meter {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e6eeec;
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--teal);
+}
+
+.meter.is-warning span {
+  background: var(--amber);
+}
+
+.meter.is-danger span {
+  background: #d64545;
+}
+
+/* ---------- Tables ---------- */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+}
+
+.table th {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #edf2f0;
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.cell-note {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.empty-cell {
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Search and filter fields above a table */
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 0 16px;
+}
+
+/* ---------- Text areas use the same look as inputs ---------- */
+.field textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background-color: var(--field-bg);
+  font-size: 16px;
+  color: var(--ink-soft);
+  resize: vertical;
+}
+
+.field textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(8, 119, 109, 0.15);
+}
+
+.field textarea[aria-invalid="true"] {
+  border-color: var(--danger);
+  background-color: var(--danger-bg);
+}
+
+/* ---------- Alerts page ---------- */
+.alert-list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alert-list h2 {
+  margin: 6px 0 6px;
+}
+
+/* ---------- Staff sign-in page ---------- */
+.staff-login {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 78px);
+  padding: 40px 16px;
+}
+
+.staff-login .auth-card {
+  width: min(100%, 420px);
+}
+
+.auth-title {
+  margin-top: 6px;
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+/* ---------- Tablets and phones ---------- */
+@media (max-width: 1000px) {
+  .grid-4,
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .details,
+  .filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    padding: 18px;
+  }
+}

@@ -30,30 +30,33 @@ A box is ticked only after the item has been checked and works. See [test-cases.
 
 ## Phase 2: Frontend foundation
 
-- [x] Shared styles: colors, fonts, header, buttons, form fields (`frontend/css/base.css`)
+- [x] **Moved to Vue** (required by the instructor): Vue 3 + Vue Router + Vite in `frontend/` (2026-11-05)
+- [x] Shared styles: colors, fonts, header, buttons, form fields (`frontend/src/css/base.css`), plain external CSS
 - [x] Login page: sign in form with validation
 - [x] Login page: create account form with validation
 - [x] Login page works on desktop, tablet and phone
 - [x] Labels, visible error messages, keyboard use
-- [ ] Staff login page (waiting on decision 5: what staff sign in with)
-- [ ] Shared navigation for the resident portal
-- [ ] Shared sidebar for the staff portal
+- [x] Staff login page (draft: email + password; the real method is still to be confirmed)
+- [x] Shared navigation for the resident portal (top menu)
+- [x] Shared sidebar for the staff portal (side menu, becomes a top bar on phones)
 
-## Phase 3: Main pages (frontend only, sample data clearly labeled)
+## Phase 3: Main pages (frontend draft with sample data, clearly labeled)
+
+The draft is done; each page still needs to be connected to the backend in Phase 4.
 
 Resident portal:
-- [ ] Home
-- [ ] My Household (household profile)
-- [ ] Evacuation (assigned center)
-- [ ] Alerts and announcements
-- [ ] Assistance requests (only if the group keeps it in scope)
+- [x] Home (draft)
+- [x] My Household (draft; family member list waits on a members table)
+- [x] Evacuation (draft; assigned center uses a sample Purok rule)
+- [x] Alerts and announcements (draft)
+- [x] Assistance requests (draft; requests are added on the page only, nothing is sent)
 
 Staff portal:
-- [ ] Dashboard
-- [ ] Household Profiles (list + add/edit household)
-- [ ] Evacuation Centers (list, capacity, occupancy)
-- [ ] Relief Distribution (record and review distributions)
-- [ ] SMS Alerts (compose screen; real sending only in Phase 4)
+- [x] Dashboard (draft)
+- [x] Household Profiles (draft: list, search, Purok filter; add/edit needs the backend)
+- [x] Evacuation Centers (draft: capacity bars; check-in needs the backend)
+- [x] Relief Distribution (draft: stock + distribution records; uses the proposed relief tables)
+- [x] SMS Alerts (draft: compose with character counter; **no SMS is sent**)
 - [ ] Reports & Analytics (only if the group keeps it in scope)
 
 Public:

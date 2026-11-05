@@ -1,6 +1,43 @@
 # Test cases and results
 
-## Login page (`frontend/index.html`)
+## Vue frontend draft (sample data)
+
+**Tested:** 2026-11-05
+**How:** `npm run build` (no errors), then automated browser tests (Playwright, Chromium) on the dev server at 1440, 768, 375 and 320px wide, plus screenshots checked by eye (`docs/screenshots/vue-draft-v1/`).
+**Not tested yet:** a real phone, Firefox, Safari, and anything involving the backend (there isn't one yet).
+
+Final result: **all checks pass.**
+
+| ID | What we test | Expected result | Result |
+|---|---|---|---|
+| V01 | Open all 13 pages | Each page shows its heading and the right browser tab title; portal/staff pages show the "sample data" banner | Pass (13/13) |
+| V02 | Resident sign in with empty fields | "Enter your mobile number." and "Enter your password." | Pass |
+| V03 | Same as V02 | Cursor jumps to the mobile number field | Pass |
+| V04 | Invalid mobile `12345` | "Enter a valid mobile number…" | Pass |
+| V05 | Valid mobile `0917 123 4567` + password | Demo message, then the resident portal opens | Pass |
+| V06 | Click "Create an account" | Register form opens, focus on its heading | Pass |
+| V07 | Register with empty fields | 4 errors: name, mobile, password, Purok | Pass |
+| V08 | Register with valid details | "…Nothing was saved." | Pass |
+| V09 | Staff sign in with `notanemail` | "Enter a valid email…" | Pass |
+| V10 | Staff sign in with a valid email | Demo message, then the staff dashboard opens | Pass |
+| V11 | Staff households: search "santos", filter Purok 3, search "zzzz" | 1 row, 2 rows, "No households match" | Pass |
+| V12 | Resident assistance: submit empty, then valid | 2 errors; then the request is added on the page with "NOT sent to the barangay" | Pass |
+| V13 | Staff SMS: submit empty, then valid | Errors; then "Demo: no SMS was sent…" (honest) | Pass |
+| V14 | Open Relief Distribution | Highlighted in the staff menu | Pass |
+| V15 | Open Alerts | Highlighted in the resident menu | Pass |
+| V16 | All 13 pages at 1440, 768, 375 and 320px | No sideways scrolling | Pass (52/52) |
+| V17 | Watch the browser console during all tests | No errors or Vue warnings | Pass |
+
+### Problems found and fixed
+
+| Problem | Fix |
+|---|---|
+| On phones, the staff dashboard advisory text was squeezed into a ~100px column by the date beside it | Moved the date under the message (now ~247px wide) |
+| On phones, the sideways-scrolling menus showed a clunky scrollbar, and nothing hinted at more items | Hid the scrollbar and faded the right edge |
+
+---
+
+## Login page, first version (plain HTML, replaced by the Vue draft)
 
 **Tested:** 2026-10-15
 **How:** automated browser tests (Playwright, Chromium browser) at several screen sizes, plus checking screenshots by eye.

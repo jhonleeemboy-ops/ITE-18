@@ -1,0 +1,173 @@
+/* =========================================================
+   Staff dashboard layout: side menu + main area
+   ========================================================= */
+
+.staff-shell {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.staff-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100vh;
+  padding: 20px 16px;
+  background: var(--surface);
+  border-right: 1px solid #dee8e5;
+}
+
+.staff-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.staff-nav-label {
+  margin: 0 0 6px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.staff-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--label);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.staff-nav a:hover {
+  background: var(--teal-soft);
+  color: var(--ink);
+}
+
+/* RouterLink adds this class to the link of the page you're on */
+.staff-nav a.router-link-active {
+  background: #e0f1ee;
+  color: var(--teal);
+}
+
+.staff-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #edf2f0;
+}
+
+.staff-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.staff-user strong,
+.staff-user small {
+  display: block;
+}
+
+.staff-user small {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.staff-main {
+  min-width: 0;
+  padding: 24px 32px 56px;
+}
+
+.staff-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-bottom: 16px;
+}
+
+.staff-topbar h1 {
+  font-size: clamp(24px, 3vw, 30px);
+}
+
+.staff-topbar p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Tablets and phones: the side menu becomes a bar at the top */
+@media (max-width: 900px) {
+  .staff-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .staff-sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+    height: auto;
+    padding: 12px 16px 0;
+    border-right: 0;
+    border-bottom: 1px solid #dee8e5;
+  }
+
+  .staff-foot {
+    flex-direction: row;
+    align-items: center;
+    margin: 0 0 0 auto;
+    padding: 0;
+    border-top: 0;
+  }
+
+  .staff-user {
+    display: none;
+  }
+
+  /* Menu links in one row that scrolls sideways */
+  .staff-nav {
+    flex-direction: row;
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    /* Hide the scrollbar and fade the right edge, a hint that the menu scrolls sideways */
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, #000 82%, transparent);
+  }
+
+  .staff-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .staff-nav-label {
+    display: none;
+  }
+
+  .staff-nav a {
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+  }
+
+  .staff-nav a.router-link-active {
+    background: none;
+    border-bottom-color: var(--teal);
+  }
+
+  .staff-main {
+    padding: 18px 16px 48px;
+  }
+}
