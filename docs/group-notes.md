@@ -58,6 +58,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Tue 2026-11-03 | **Stack** | **Laravel + MySQL** backend. Jhann asked about Vue for the dashboard, and Jhon Lee said OK. The diagram still says "HTML / CSS / JavaScript" for the dashboard. |
 | Tue 2026-11-03 | **CSS** | Tailwind is optional. Decided: **plain external CSS files**, because everyone is more familiar with them and they're easier to debug. |
 | Thu 2026-11-05 | **Resident portal: yes** | Jhon Lee: there is a portal for residents ("naa sa residents"). So the system has a **resident portal** (sign in + register, our login page) **and** a **staff dashboard** (separate staff login). |
+| Thu 2026-11-05 | **ERD v1 received** | 7 tables: households, users, incidents, incident_notes, advisories, evacuation_centers, emergency_contacts. Review and suggestions: [erd-review.md](erd-review.md). Main gaps: no relief tables, no password/mobile on users, no SMS log. |
 | Sat 2026-10-31 | Pace | Jhon Lee: don't cram, help each other so everyone can answer the instructor's questions, aim for a little progress every day. Jhann: "hinay hinayon", start **next week** (week of Nov 2). |
 
 ## Still unclear
