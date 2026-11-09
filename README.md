@@ -4,13 +4,38 @@
 
 Group 4 college mini-thesis (ITE 18).
 
-## Current status (2026-11-05)
+## Current status (2026-11-09)
 
 | Part | Status |
 |---|---|
 | Frontend (Vue) | **Draft built and tested.** Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). It uses **sample data only** and isn't connected to a backend yet. |
-| Backend (Laravel + MySQL) | Not added yet (Jhon Lee). ERD v1 received; see [docs/erd-review.md](docs/erd-review.md). |
+| Backend (Laravel 13 + MySQL) | **Added by Jhon Lee (Nov 9)** in `backend/`: Sanctum login tokens, migrations, demo data, API routes. **Resident registration is connected** to it (Nov 9). |
 | SMS | Not started. The provider still needs to be chosen. |
+
+## How to run the backend (Laravel, first time)
+
+You need **Laragon** running (click **Start All**) for PHP 8.3, Composer and MySQL.
+
+1. Open a terminal in the `backend` folder.
+2. Install the packages: `composer install`
+3. Make your private settings file: copy `.env.example` to `.env`, then set:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=disaster_ready
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+   `.env` is never uploaded to GitHub. Keep it that way.
+4. `php artisan key:generate`
+5. Create the empty database **disaster_ready** (in HeidiSQL from Laragon, or `mysql -u root -e "CREATE DATABASE disaster_ready"`).
+6. Make the tables and demo data: `php artisan migrate --seed`
+7. Start the API: `php artisan serve --port=8000`. It runs at http://127.0.0.1:8000/api
+
+After the first time, only step 7 is needed (and `php artisan migrate` when someone adds a new migration).
+
+**Demo accounts (seeded, password `password123`):** staff `staff@brgy.test`, admin `admin@brgy.test`, resident mobile `09171234567`.
 
 ## How to run the frontend
 
@@ -29,7 +54,8 @@ You need **Node.js** (version 24 LTS) installed.
 
 To stop it, click in the terminal and press **Ctrl + C**.
 
-**Demo sign in:** any valid mobile number (e.g. `0917 123 4567`) with any password opens the sample resident portal. On the staff sign-in page, any valid email (e.g. `staff@example.com`) opens the sample dashboard. Nothing is checked against real accounts yet.
+**Create account is real:** with the backend running, registering saves the account to MySQL and signs you in (the token is kept in the browser).
+**Sign in is still demo:** any valid mobile number with any password opens the sample resident portal; on the staff page, any valid email opens the sample dashboard. Connecting sign-in to `/api/login` is next.
 
 To make the final files for hosting: `npm run build` (they appear in `frontend/dist`).
 
@@ -49,11 +75,12 @@ ITE-18
 │       ├── css/                   Plain CSS: base, login, app (shared), portal, staff
 │       ├── data/sample-data.js    ALL the sample data (made up), using the ERD field names
 │       ├── utils/                 Form checks (validation.js) and date/number formatting
+│       ├── services/              api.js (Axios client for the Laravel API) + session.js (saved login token)
 │       ├── composables/toast.js   The small pop-up message
 │       ├── components/            Reusable pieces: logo, badges, occupancy bar, icons
 │       ├── layouts/               Resident portal frame (top menu), staff frame (side menu)
 │       └── pages/                 Login pages + resident/ and staff/ pages
-├── backend                        Laravel + MySQL (Jhon Lee, not added yet)
+├── backend                        Laravel 13 + MySQL API (Jhon Lee): routes/api.php, app/Http/Controllers, database/migrations + seeders
 └── docs
     ├── project-status.md          What exists, tools, blockers, decisions needed
     ├── checklist.md               Phase checklist and group task list

@@ -1,13 +1,16 @@
 <script setup>
 // Resident sign in + create account (one page, two forms).
-// DEMO: nothing is sent to a server yet. A valid sign-in opens the sample portal.
+// CREATE ACCOUNT: connected to the Laravel API (POST /api/register).
+// SIGN IN: still demo mode (any valid mobile opens the sample portal).
 import { computed, nextTick, reactive, ref, watch } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import AppIcon from "../components/AppIcon.vue";
 import BrandMark from "../components/BrandMark.vue";
 import { advisories, puroks } from "../data/sample-data.js";
 import { showToast } from "../composables/toast.js";
-import { focusFirstError, mobileError, newPasswordError, requiredError } from "../utils/validation.js";
+import api, { readApiError } from "../services/api.js";
+import { saveSession } from "../services/session.js";
+import { cleanMobileNumber, focusFirstError, mobileError, newPasswordError, requiredError } from "../utils/validation.js";
 
 const props = defineProps({ mode: { type: String, default: "signin" } });
 const router = useRouter();
@@ -23,10 +26,21 @@ const register = reactive({ name: "", mobile: "", password: "", purok: "" });
 const errors = reactive({});
 const status = ref("");
 const heading = ref(null);
+const submitting = ref(false); // true while waiting for the server
+const statusIsError = ref(false); // red message box instead of the normal one
+
+// Laravel field names → the id of our input, so server errors show under the right field
+const registerFieldIds = {
+  name: "register-name",
+  mobile_number: "register-mobile",
+  password: "register-password",
+  purok: "register-purok",
+};
 
 function clearError(fieldId) {
   errors[fieldId] = "";
   status.value = "";
+  statusIsError.value = false;
 }
 
 // When switching between the two forms, clear old messages and
@@ -36,6 +50,7 @@ watch(
   async () => {
     Object.keys(errors).forEach((key) => (errors[key] = ""));
     status.value = "";
+    statusIsError.value = false;
     await nextTick();
     heading.value?.focus();
   }
@@ -51,15 +66,52 @@ function submitSignin() {
   setTimeout(() => router.push("/resident/home"), 1200);
 }
 
-function submitRegister() {
+async function submitRegister() {
+  const fieldIds = Object.values(registerFieldIds);
+
+  // 1. Check the form in the browser first (fast, no server needed)
   errors["register-name"] = register.name.trim().length < 2 ? "Enter your full name." : "";
   errors["register-mobile"] = mobileError(register.mobile);
   errors["register-password"] = newPasswordError(register.password);
-  errors["register-purok"] = requiredError(register.purok, "Select your Purok.");
+  errors["register-purok"] = register.purok === "" ? "Select your Purok." : "";
 
-  if (focusFirstError(errors, ["register-name", "register-mobile", "register-password", "register-purok"])) return;
+  if (focusFirstError(errors, fieldIds)) return;
 
-  status.value = "Your details look correct, but registration isn't connected to the server yet. Nothing was saved.";
+  // 2. Send it to the Laravel API
+  submitting.value = true;
+  status.value = "";
+  statusIsError.value = false;
+
+  try {
+    const { data } = await api.post("/register", {
+      name: register.name.trim(),
+      mobile_number: cleanMobileNumber(register.mobile), // e.g. "9171234567"
+      password: register.password,
+      purok: register.purok, // a number 1–8 (the API rejects "Purok 3" text)
+    });
+
+    // 3. Success (201): remember the token + user, then open the portal
+    saveSession(data.token, data.user);
+    status.value = `Account created! Welcome, ${data.user.name}. Opening your portal…`;
+    setTimeout(() => router.push("/resident/home"), 1000);
+  } catch (error) {
+    // 4. Failed: show the server's messages under the matching fields
+    const { fieldErrors, message } = readApiError(error);
+    let shownUnderFields = 0;
+    for (const [field, messages] of Object.entries(fieldErrors)) {
+      const fieldId = registerFieldIds[field];
+      if (fieldId) {
+        errors[fieldId] = messages[0];
+        shownUnderFields++;
+      }
+    }
+    // If the problem isn't about one of our fields, say it above the button
+    status.value = message || (shownUnderFields === 0 ? error.response?.data?.message || "Something went wrong. Please try again." : "");
+    statusIsError.value = true;
+    focusFirstError(errors, fieldIds);
+  } finally {
+    submitting.value = false;
+  }
 }
 </script>
 
@@ -186,13 +238,17 @@ function submitRegister() {
               :aria-invalid="errors['register-purok'] ? 'true' : null" @change="clearError('register-purok')"
             >
               <option value="">Select your Purok</option>
-              <option v-for="purok in puroks" :key="purok" :value="purok">{{ purok }}</option>
+              <!-- The value is the number (1–8), because the API expects a number -->
+              <option v-for="(purok, index) in puroks" :key="purok" :value="index + 1">{{ purok }}</option>
             </select>
             <p v-if="errors['register-purok']" id="register-purok-error" class="field-error">{{ errors["register-purok"] }}</p>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block">Register household <AppIcon name="arrow" /></button>
-          <p v-if="status" class="form-status" role="status">{{ status }}</p>
+          <button type="submit" class="btn btn-primary btn-block" :disabled="submitting">
+            <template v-if="submitting">Creating account…</template>
+            <template v-else>Register household <AppIcon name="arrow" /></template>
+          </button>
+          <p v-if="status" class="form-status" :class="{ 'is-error': statusIsError }" role="status">{{ status }}</p>
 
           <p class="switch-text">
             Already registered?
@@ -202,7 +258,8 @@ function submitRegister() {
 
         <p class="prototype-note">
           <AppIcon name="shield" />
-          Demo: sign-in isn't connected to the server yet. Any valid mobile number opens the sample portal.
+          <template v-if="isRegister">Creating an account saves it to the database through the Laravel API.</template>
+          <template v-else>Demo: sign-in isn't connected to the server yet. Any valid mobile number opens the sample portal.</template>
         </p>
       </section>
     </main>

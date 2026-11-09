@@ -8,7 +8,7 @@ Field names follow ERD v1 where it has them. Fields marked **(new)** aren't in E
 
 | Form (page) | Fields the user types | Notes / checks done in the browser |
 |---|---|---|
-| Resident **create account** (`#/register`) | `name`, `mobile_number` **(new)**, `password` **(new)**, `purok` | Mobile = 10 digits starting with 9 (accepts 0917… / +63…); password at least 8 characters; Purok 1–8 required |
+| Resident **create account** (`#/register`) | `name`, `mobile_number`, `password`, `purok` | **Connected (Nov 9)** to `POST /api/register`. Sends `mobile_number` as 10 digits (e.g. `9171234567`) and `purok` as a **number 1–8**. Answer: 201 `{ user (with household), token }`; errors: 422 `{ message, errors: { field: [...] } }` |
 | Resident **sign in** (`#/`) | `mobile_number`, `password` | Backend must check the password (hashed) and return the user + role |
 | Staff **sign in** (`#/staff-login`) | `email`, `password` | The staff sign-in method is still to be confirmed |
 | Resident **assistance request** (`#/resident/assistance`) | `type` (evacuation / relief / medical / rescue / hazard), `description` **(new)** | Saved as an INCIDENT; backend adds `reporter_id`, `status = pending`, `created_at` |

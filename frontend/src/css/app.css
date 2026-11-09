@@ -31,6 +31,20 @@ a.link-button:hover {
   border-color: var(--teal);
 }
 
+/* While a form is being sent, the button is greyed out and can't be clicked twice */
+.btn:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+/* Red message box for errors (e.g. "Can't reach the server") */
+.form-status.is-error {
+  border-color: #f3c3be;
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-weight: 500;
+}
+
 .button-row {
   display: flex;
   flex-wrap: wrap;

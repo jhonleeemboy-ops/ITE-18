@@ -13,12 +13,14 @@ import {
   incidents,
 } from "../../data/sample-data.js";
 import { formatDateTime } from "../../utils/format.js";
+import { getUser } from "../../services/session.js";
 
 const household = findHousehold(currentResident.household_id);
 const center = assignedCenterFor(household.purok);
 const activeAdvisory = advisories.find((advisory) => advisory.status === "active");
 const myRequests = incidents.filter((incident) => incident.reporter_id === currentResident.id);
-const firstName = currentResident.name.split(" ")[0];
+// Greet the signed-in user (from the API) if there is one; otherwise the sample resident
+const firstName = (getUser()?.name || currentResident.name).split(" ")[0];
 </script>
 
 <template>

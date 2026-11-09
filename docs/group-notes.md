@@ -63,6 +63,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Fri 2026-11-06 | Frontend ↔ backend | Jhon Lee asked Jhann for an update on the frontend. Once features are complete he'll add the backend API, and the form inputs must match the database. Answer: [frontend-data-fields.md](frontend-data-fields.md). |
 | Fri 2026-11-06 | Survey consent | Jhann suggested adding a consent statement, fixing the "Tittle" typo, and asking for the number of Puroks, official hotlines and households. Jhon Lee: OK, he'll add the consent statement. He also noted the field list on GitHub. |
 | Fri 2026-11-06 | Paper | After data gathering, aim to draft **Ch 1–3 next week**. Methods are decided; the user feedback is needed to validate the problems. |
+| Mon 2026-11-09 | **Backend pushed** | Jhon Lee pushed the Laravel 13 + MySQL backend (`backend/`): Sanctum token login, 15 migrations, seeders, API routes for register/login, households, centers, advisories, incidents, relief and SMS alerts. He added the relief tables, SMS logs and Purok-to-center links from the ERD review. Jhann connected the registration form to `/api/register`. |
 | Sat 2026-10-31 | Pace | Jhon Lee: don't cram, help each other so everyone can answer the instructor's questions, aim for a little progress every day. Jhann: "hinay hinayon", start **next week** (week of Nov 2). |
 
 ## Still unclear

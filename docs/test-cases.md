@@ -1,5 +1,46 @@
 # Test cases and results
 
+## Resident registration connected to the Laravel API
+
+**Tested:** 2026-11-09, with Jhon Lee's backend (commit 5b8249a) running locally on http://127.0.0.1:8000 (Laragon MySQL, `migrate --seed`) and the Vue app on http://127.0.0.1:5173.
+**How:** API tests with curl, then browser tests (Playwright, Chromium) through the real form, then a database check. Screenshots: `docs/screenshots/api-register/`.
+
+### API (curl, `POST /api/register`)
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| A01 | Valid data (`purok: 3`, mobile `+63 999 000 0003`) | 201 with `user` (+ household) and `token`; no password in the response | Pass |
+| A02 | Same mobile again | 422 "This mobile number is already registered." | Pass |
+| A03 | Empty body | 422 with errors for name, mobile_number, password, purok | Pass |
+| A04 | `purok: "Purok 3"` (text, what the old form sent) | 422 "must be an integer" (so the form must send a number) | Pass |
+| A05 | `/api/me` with the token / without | 200 with the user / 401 | Pass |
+| A06 | CORS preflight from http://localhost:5173 | Allowed (`Access-Control-Allow-Origin: *`) | Pass |
+
+### Browser (the real form)
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| R01 | Submit empty form | 4 errors, **no request sent** to the server | Pass |
+| R02 | Valid details, Purok 5 | Request body has `purok: 5` (number) and a clean 10-digit mobile | Pass |
+| R03 | Same as R02 | Server answers 201 Created | Pass |
+| R04 | Same as R02 | Token and user saved in the browser (`dr_token`, `dr_user`) | Pass |
+| R05 | Same as R02 | "Account created! Welcome, …" | Pass |
+| R06 | Same as R02 | Portal opens and greets the **new** user by name | Pass |
+| R07 | Use the saved token on `/api/me` | 200 with the same user | Pass |
+| R08 | Click Sign out | Token removed, back to sign in | Pass |
+| R09 | Register the same mobile again | Server's 422 message under the mobile field, cursor moves there | Pass |
+| R10 | Backend unreachable | Red "Can't reach the server…" message; button usable again | Pass |
+| R11 | Slow server | Button disabled and shows "Creating account…" | Pass |
+| R12 | Sign-in page | Still labeled demo (not connected yet) | Pass |
+| R13 | Browser console | No unexpected errors or Vue warnings (only the deliberate failed requests from R09–R11) | Pass |
+
+### Database check
+
+- New users are saved with a **bcrypt-hashed password** (`$2y$12$…`, 60 characters), never plain text, and with the correct Purok on their household.
+- All test accounts created during testing were deleted afterwards; the seeded demo data was kept.
+
+---
+
 ## Vue frontend draft (sample data)
 
 **Tested:** 2026-11-05
