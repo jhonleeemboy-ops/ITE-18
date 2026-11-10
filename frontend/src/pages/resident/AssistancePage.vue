@@ -1,13 +1,18 @@
 <script setup>
-// Resident portal: Assistance requests (saved as INCIDENTS in the ERD)
-import { reactive, ref } from "vue";
+// Resident portal: Assistance requests (saved as INCIDENTS in the database)
+// Connected to the Laravel API: GET /incidents and POST /incidents.
+import { onMounted, reactive, ref } from "vue";
 import StatusBadge from "../../components/StatusBadge.vue";
-import { currentResident, incidents, incidentTypes } from "../../data/sample-data.js";
+import api from "../../api";
+import { incidentTypes } from "../../data/sample-data.js"; // only the type labels
 import { formatDateTime } from "../../utils/format.js";
+import { mapIncident } from "../../utils/mappers.js";
 import { focusFirstError } from "../../utils/validation.js";
 
-// This resident's requests (a copy, so new demo requests only live on this page)
-const myRequests = ref(incidents.filter((incident) => incident.reporter_id === currentResident.id));
+const myRequests = ref([]);
+const loading = ref(true);
+const loadError = ref("");
+const submitting = ref(false);
 
 const form = reactive({ type: "", description: "" });
 const errors = reactive({});
@@ -18,23 +23,44 @@ function clearError(fieldId) {
   status.value = "";
 }
 
-function submit() {
+onMounted(async () => {
+  try {
+    // residents only receive their own requests, newest first
+    const { data } = await api.get("/incidents");
+    myRequests.value = data.map(mapIncident);
+  } catch (e) {
+    loadError.value = "Could not load your requests. Please try again.";
+  } finally {
+    loading.value = false;
+  }
+});
+
+async function submit() {
   errors["request-type"] = form.type === "" ? "Choose the type of help you need." : "";
   errors["request-description"] = form.description.trim().length < 10 ? "Tell us a bit more (at least 10 characters)." : "";
 
   if (focusFirstError(errors, ["request-type", "request-description"])) return;
 
-  // DEMO: add it to the list on this page only
-  myRequests.value.unshift({
-    id: Date.now(),
-    type: form.type,
-    status: "pending",
-    description: form.description.trim(),
-    created_at: new Date().toISOString(),
-  });
-  form.type = "";
-  form.description = "";
-  status.value = "Demo: your request was added below, but it was NOT sent to the barangay. Sending needs the backend.";
+  submitting.value = true;
+  status.value = "";
+  try {
+    const { data } = await api.post("/incidents", {
+      type: form.type,
+      description: form.description.trim(),
+    });
+    myRequests.value.unshift(mapIncident(data));
+    form.type = "";
+    form.description = "";
+    status.value = "Your request was sent to the barangay.";
+  } catch (e) {
+    const apiErrors = e.response?.data?.errors;
+    if (apiErrors?.type) errors["request-type"] = apiErrors.type[0];
+    else if (apiErrors?.description) errors["request-description"] = apiErrors.description[0];
+    else if (!e.response) status.value = "Cannot reach the server. Your request was NOT sent. Please try again.";
+    else status.value = "Your request was NOT sent. Please try again.";
+  } finally {
+    submitting.value = false;
+  }
 }
 </script>
 
@@ -78,7 +104,7 @@ function submit() {
             <p v-if="errors['request-description']" id="request-description-error" class="field-error">{{ errors["request-description"] }}</p>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit request</button>
+          <button type="submit" class="btn btn-primary" :disabled="submitting">Submit request</button>
           <p v-if="status" class="form-status" role="status">{{ status }}</p>
         </form>
 
@@ -90,7 +116,12 @@ function submit() {
           <h2>Your requests</h2>
           <p>{{ myRequests.length }} total</p>
         </div>
-        <ul class="list">
+
+        <p v-if="loading" role="status">Loading your requests…</p>
+        <p v-else-if="loadError" class="field-error" role="alert">{{ loadError }}</p>
+        <p v-else-if="!myRequests.length" class="list-meta">You have not sent any requests yet.</p>
+
+        <ul v-else class="list">
           <li v-for="request in myRequests" :key="request.id">
             <p class="list-title">{{ incidentTypes[request.type] }} <StatusBadge :value="request.status" /></p>
             <p class="list-text">{{ request.description }}</p>

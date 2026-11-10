@@ -1,30 +1,56 @@
 <script setup>
-// Staff sign in. DEMO: a valid email + password opens the sample staff dashboard.
-// How staff will really sign in (email? username?) is still to be confirmed by the group.
+// Staff sign in. Connected to the Laravel API: POST /login with email + password.
+// Staff and admin accounts are created by the seeder (staff@brgy.test).
 import { reactive, ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import AppIcon from "../components/AppIcon.vue";
 import BrandMark from "../components/BrandMark.vue";
 import { emailError, focusFirstError, requiredError } from "../utils/validation.js";
+import api from "../api";
 
 const router = useRouter();
 const form = reactive({ email: "", password: "" });
 const errors = reactive({});
 const status = ref("");
+const loading = ref(false);
 
 function clearError(fieldId) {
   errors[fieldId] = "";
   status.value = "";
 }
 
-function submit() {
+async function submit() {
   errors["staff-email"] = emailError(form.email);
   errors["staff-password"] = requiredError(form.password, "Enter your password.");
 
   if (focusFirstError(errors, ["staff-email", "staff-password"])) return;
 
-  status.value = "Demo: staff sign-in isn't connected to the server yet. Opening the sample dashboard…";
-  setTimeout(() => router.push("/staff/dashboard"), 1200);
+  loading.value = true;
+  status.value = "";
+  try {
+    const { data } = await api.post("/login", {
+      email: form.email.trim(),
+      password: form.password,
+    });
+
+    // residents must use the resident sign in
+    if (!["staff", "admin"].includes(data.user.role)) {
+      status.value = "This account is not a staff account. Please use the resident sign in.";
+      return;
+    }
+
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    router.push("/staff/dashboard");
+  } catch (e) {
+    const apiErrors = e.response?.data?.errors;
+    if (apiErrors?.password) errors["staff-password"] = apiErrors.password[0];
+    else if (apiErrors?.email) errors["staff-email"] = apiErrors.email[0];
+    else if (!e.response) status.value = "Cannot reach the server. Check your connection and try again.";
+    else status.value = e.response.data?.message || "Something went wrong. Please try again.";
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 
@@ -65,14 +91,9 @@ function submit() {
             <p v-if="errors['staff-password']" id="staff-password-error" class="field-error">{{ errors["staff-password"] }}</p>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-block">Sign in to dashboard <AppIcon name="arrow" /></button>
+          <button type="submit" class="btn btn-primary btn-block" :disabled="loading">Sign in to dashboard <AppIcon name="arrow" /></button>
           <p v-if="status" class="form-status" role="status">{{ status }}</p>
         </form>
-
-        <p class="prototype-note">
-          <AppIcon name="shield" />
-          Demo: any valid email opens the sample dashboard. The staff sign-in method is still to be confirmed.
-        </p>
       </section>
     </main>
   </div>

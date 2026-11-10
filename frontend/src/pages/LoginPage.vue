@@ -1,6 +1,6 @@
 <script setup>
 // Resident sign in + create account (one page, two forms).
-// DEMO: nothing is sent to a server yet. A valid sign-in opens the sample portal.
+// Connected to the Laravel API: POST /login and POST /register.
 import { computed, nextTick, reactive, ref, watch } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import AppIcon from "../components/AppIcon.vue";
@@ -8,12 +8,13 @@ import BrandMark from "../components/BrandMark.vue";
 import { advisories, puroks } from "../data/sample-data.js";
 import { showToast } from "../composables/toast.js";
 import { focusFirstError, mobileError, newPasswordError, requiredError } from "../utils/validation.js";
+import api from "../api";
 
 const props = defineProps({ mode: { type: String, default: "signin" } });
 const router = useRouter();
 
 const isRegister = computed(() => props.mode === "register");
-const latestAdvisory = advisories[0]; // SAMPLE advisory
+const latestAdvisory = advisories[0]; // SAMPLE advisory (left side, not connected yet)
 
 // What the user typed in each form
 const signin = reactive({ mobile: "", password: "" });
@@ -22,6 +23,7 @@ const register = reactive({ name: "", mobile: "", password: "", purok: "" });
 // Error message for each field, by field id ("" or missing = no error)
 const errors = reactive({});
 const status = ref("");
+const loading = ref(false);
 const heading = ref(null);
 
 function clearError(fieldId) {
@@ -41,17 +43,50 @@ watch(
   }
 );
 
-function submitSignin() {
+// Save the login and open the resident portal
+function saveLogin(data) {
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("user", JSON.stringify(data.user));
+  router.push("/resident/home");
+}
+
+// Turn an API error into a message the user can read
+function apiMessage(e) {
+  if (!e.response) return "Cannot reach the server. Check your connection and try again.";
+  return e.response.data?.message || "Something went wrong. Please try again.";
+}
+
+async function submitSignin() {
   errors["signin-mobile"] = mobileError(signin.mobile);
   errors["signin-password"] = requiredError(signin.password, "Enter your password.");
 
   if (focusFirstError(errors, ["signin-mobile", "signin-password"])) return;
 
-  status.value = "Demo: sign-in isn't connected to the server yet. Opening the sample resident portal…";
-  setTimeout(() => router.push("/resident/home"), 1200);
+  loading.value = true;
+  status.value = "";
+  try {
+    // the backend accepts 0917…, +63917… and 917…
+    const { data } = await api.post("/login", {
+      mobile_number: signin.mobile,
+      password: signin.password,
+    });
+
+    if (data.user.role !== "resident") {
+      status.value = "This is a staff account. Please use the Barangay staff login.";
+      return;
+    }
+    saveLogin(data);
+  } catch (e) {
+    const apiErrors = e.response?.data?.errors;
+    if (apiErrors?.password) errors["signin-password"] = apiErrors.password[0];
+    else if (apiErrors?.mobile_number) errors["signin-mobile"] = apiErrors.mobile_number[0];
+    else status.value = apiMessage(e);
+  } finally {
+    loading.value = false;
+  }
 }
 
-function submitRegister() {
+async function submitRegister() {
   errors["register-name"] = register.name.trim().length < 2 ? "Enter your full name." : "";
   errors["register-mobile"] = mobileError(register.mobile);
   errors["register-password"] = newPasswordError(register.password);
@@ -59,7 +94,30 @@ function submitRegister() {
 
   if (focusFirstError(errors, ["register-name", "register-mobile", "register-password", "register-purok"])) return;
 
-  status.value = "Your details look correct, but registration isn't connected to the server yet. Nothing was saved.";
+  loading.value = true;
+  status.value = "";
+  try {
+    const { data } = await api.post("/register", {
+      name: register.name.trim(),
+      mobile_number: register.mobile,
+      password: register.password,
+      // the API wants a number 1-8, so "Purok 3" becomes 3
+      purok: Number(String(register.purok).replace(/\D/g, "")),
+    });
+    saveLogin(data);
+  } catch (e) {
+    const apiErrors = e.response?.data?.errors;
+    if (apiErrors) {
+      if (apiErrors.name) errors["register-name"] = apiErrors.name[0];
+      if (apiErrors.mobile_number) errors["register-mobile"] = apiErrors.mobile_number[0];
+      if (apiErrors.password) errors["register-password"] = apiErrors.password[0];
+      if (apiErrors.purok) errors["register-purok"] = apiErrors.purok[0];
+    } else {
+      status.value = apiMessage(e);
+    }
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 

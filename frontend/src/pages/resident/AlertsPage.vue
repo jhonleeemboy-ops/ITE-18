@@ -1,8 +1,25 @@
 <script setup>
-// Resident portal: Alerts and announcements (ADVISORIES in the ERD)
+// Resident portal: Alerts and announcements (ADVISORIES in the database)
+// Connected to the Laravel API: GET /advisories (newest first).
+import { onMounted, ref } from "vue";
 import StatusBadge from "../../components/StatusBadge.vue";
-import { advisories } from "../../data/sample-data.js";
+import api from "../../api";
 import { formatDateTime } from "../../utils/format.js";
+
+const advisories = ref([]);
+const loading = ref(true);
+const error = ref("");
+
+onMounted(async () => {
+  try {
+    const { data } = await api.get("/advisories");
+    advisories.value = data;
+  } catch (e) {
+    error.value = "Could not load alerts. Please try again.";
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 
 <template>
@@ -15,7 +32,11 @@ import { formatDateTime } from "../../utils/format.js";
       </div>
     </div>
 
-    <ul class="alert-list">
+    <p v-if="loading" role="status">Loading alerts…</p>
+    <p v-else-if="error" class="field-error" role="alert">{{ error }}</p>
+    <p v-else-if="!advisories.length" class="list-meta">There are no announcements yet.</p>
+
+    <ul v-else class="alert-list">
       <li v-for="advisory in advisories" :key="advisory.id" class="card">
         <p class="list-meta">
           <StatusBadge :value="advisory.severity" /> · {{ formatDateTime(advisory.issued_at) }}

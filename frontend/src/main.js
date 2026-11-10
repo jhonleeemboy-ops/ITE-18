@@ -11,3 +11,5 @@ import "./css/portal.css";
 import "./css/staff.css";
 
 createApp(App).use(router).mount("#app");
+
+// ---- TEMPORARY connection test: delete everything below once it works ----

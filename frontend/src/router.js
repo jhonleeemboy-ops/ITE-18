@@ -32,6 +32,7 @@ const routes = [
   {
     path: "/resident",
     component: ResidentLayout,
+    meta: { role: "resident" },
     children: [
       { path: "", redirect: "/resident/home" },
       { path: "home", component: ResidentHome, meta: { title: "Home" } },
@@ -46,6 +47,7 @@ const routes = [
   {
     path: "/staff",
     component: StaffLayout,
+    meta: { role: "staff" },
     children: [
       { path: "", redirect: "/staff/dashboard" },
       { path: "dashboard", component: StaffDashboard, meta: { title: "Dashboard" } },
@@ -67,6 +69,41 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0 };
   },
+});
+
+// Who is signed in (saved by the sign in pages)
+function signedInUser() {
+  try {
+    if (!localStorage.getItem("token")) return null;
+    return JSON.parse(localStorage.getItem("user") || "null");
+  } catch {
+    return null;
+  }
+}
+
+// Route guard: signed-out visitors and the wrong role are sent to the right sign in.
+// This is only for a better experience. The Laravel API still blocks unauthorized data.
+router.beforeEach((to) => {
+  const needed = to.matched.find((record) => record.meta.role)?.meta.role;
+  const user = signedInUser();
+
+  // Public page
+  if (!needed) {
+    // Already signed in? Skip the sign in pages and go to the right home
+    if (user && (to.path === "/" || to.path === "/staff-login")) {
+      return ["staff", "admin"].includes(user.role) ? "/staff/dashboard" : "/resident/home";
+    }
+    return true;
+  }
+
+  // Protected page, not signed in
+  if (!user) return needed === "staff" ? "/staff-login" : "/";
+
+  const isStaff = ["staff", "admin"].includes(user.role);
+  if (needed === "staff" && !isStaff) return "/resident/home";
+  if (needed === "resident" && isStaff) return "/staff/dashboard";
+
+  return true;
 });
 
 // Show the page name in the browser tab
