@@ -56,4 +56,11 @@ class SmsAlertController extends Controller
 
         return response()->json($result, 201);
     }
+
+    public function index(Request $request)
+{
+    abort_unless($request->user()->isStaff(), 403, 'Staff only.');
+
+    return SmsLog::with('advisory:id,title')->latest()->get();
+}
 }

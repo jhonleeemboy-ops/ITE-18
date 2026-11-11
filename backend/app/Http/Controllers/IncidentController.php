@@ -12,7 +12,7 @@ class IncidentController extends Controller
     {
         $user = $request->user();
 
-        $query = Incident::with('reporter.household')->latest();
+        $query = Incident::with('reporter.household', 'notes')->latest();
 
         if (!$user->isStaff()) {
             $query->where('reporter_id', $user->id);

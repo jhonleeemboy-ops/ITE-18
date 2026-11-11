@@ -41,4 +41,5 @@ Route::middleware('auth:sanctum')->group(function () {
     // staff
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::post('/sms-alerts', [SmsAlertController::class, 'store']);
+    Route::get('/sms-alerts', [SmsAlertController::class, 'index']);
 });
