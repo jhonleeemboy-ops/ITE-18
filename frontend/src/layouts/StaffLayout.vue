@@ -1,13 +1,31 @@
 <script setup>
 // The frame around every staff page: side menu + top bar.
 // The page itself appears where <RouterView /> is.
-import { RouterLink, RouterView, useRoute } from "vue-router";
+import { RouterLink, RouterView, useRoute, useRouter } from "vue-router";
 import AppIcon from "../components/AppIcon.vue";
 import BrandMark from "../components/BrandMark.vue";
 import SampleBanner from "../components/SampleBanner.vue";
-import { currentStaff } from "../data/sample-data.js";
+import { currentUser } from "../utils/mappers.js";
 
 const route = useRoute();
+const router = useRouter();
+
+// The real signed-in staff member saved at sign in
+const user = currentUser();
+const displayName = user?.name || "Staff";
+const roleLabel = user?.role === "admin" ? "Administrator" : "Barangay staff";
+const initials = displayName
+  .split(" ")
+  .map((word) => word[0])
+  .slice(0, 2)
+  .join("");
+
+// Sign out: forget the login, then go back to the staff sign in
+function signOut() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  router.push("/staff-login");
+}
 
 const links = [
   { to: "/staff/dashboard", label: "Dashboard", icon: "grid" },
@@ -40,13 +58,13 @@ const today = new Date().toLocaleDateString("en-US", {
 
       <div class="staff-foot">
         <div class="staff-user">
-          <span class="avatar" aria-hidden="true">SS</span>
+          <span class="avatar" aria-hidden="true">{{ initials }}</span>
           <span>
-            <strong>{{ currentStaff.name }}</strong>
-            <small>Barangay staff (sample)</small>
+            <strong>{{ displayName }}</strong>
+            <small>{{ roleLabel }}</small>
           </span>
         </div>
-        <RouterLink to="/staff-login" class="btn btn-small"><AppIcon name="logout" /> Sign out</RouterLink>
+        <button type="button" class="btn btn-small" @click="signOut"><AppIcon name="logout" /> Sign out</button>
       </div>
     </aside>
 
@@ -55,6 +73,7 @@ const today = new Date().toLocaleDateString("en-US", {
         <h1>{{ route.meta.title }}</h1>
         <p>{{ today }}</p>
       </div>
+      <!-- Delete this line once EvacuationCenters, Relief and SmsAlerts are connected to the API -->
       <SampleBanner />
       <RouterView />
     </main>
