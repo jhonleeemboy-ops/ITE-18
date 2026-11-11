@@ -1,5 +1,35 @@
 # Test cases and results
 
+## Frontend connected to the API (Jhon Lee's update) + API address fallback
+
+**Tested:** 2026-11-12, on the desktop, with commit ed3f202 (Jhon Lee) + the fallback fix. Backend on http://127.0.0.1:8000 (Laragon MySQL 8.4, seeded demo data), Vue app on http://localhost:5173.
+**How:** API calls with PowerShell (`Invoke-WebRequest`) using the same addresses the pages call, a database check, and `vite build` with and without `frontend/.env`.
+**Not tested yet:** clicking through the pages in a browser after the update. *Jhann: add your own browser check here.*
+
+### API calls the pages make
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| C01 | Staff sign in (`staff@brgy.test`) / resident sign in (`09171234567`) | 200 with `user` and `token` | Pass |
+| C02 | Staff: `/dashboard`, `/advisories`, `/evacuation-centers`, `/incidents`, `/households`, `/sms-alerts` | 200 with data | Pass (6/6) |
+| C03 | Resident: `/me`, `/evacuation-centers`, `/advisories`, `/emergency-contacts`, `/incidents` | 200 with data | Pass (5/5) |
+| C04 | Resident token on `/sms-alerts` and `/dashboard` | 403 (staff only) | Pass |
+| C05 | `/me` without a token | 401 | Pass |
+| C06 | Staff sign in with a wrong password | 422 | Pass |
+| C07 | Resident `/incidents` only shows their own requests | Database: both seeded incidents belong to the demo resident, so 2 of 2 is correct | Pass |
+| C08 | CORS preflight from http://localhost:5173 | Allowed (`Access-Control-Allow-Origin: *`) | Pass |
+
+### API address (`frontend/src/api.js`)
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| C09 | Before the fix, no `frontend/.env` (a fresh pull) | — | **Fail:** the app had no API address (`VITE_API_URL` missing), so sign in and every page would call the wrong server |
+| C10 | After the fix, build without `frontend/.env` | Uses `http://127.0.0.1:8000/api` | Pass |
+| C11 | After the fix, build with `VITE_API_URL` set (like the online server) | Uses that address instead | Pass |
+| C12 | `npm run build` | No errors | Pass |
+
+---
+
 ## Resident registration connected to the Laravel API
 
 **Tested:** 2026-11-09, with Jhon Lee's backend (commit 5b8249a) running locally on http://127.0.0.1:8000 (Laragon MySQL, `migrate --seed`) and the Vue app on http://127.0.0.1:5173.

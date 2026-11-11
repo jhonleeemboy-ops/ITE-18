@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  // API address: from frontend/.env (VITE_API_URL) if it exists,
+  // otherwise the local Laravel server. .env is never pushed, so the fallback is needed.
+  baseURL: import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api",
   headers: { Accept: "application/json" },
 });
 
