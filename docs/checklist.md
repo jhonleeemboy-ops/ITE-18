@@ -68,7 +68,9 @@ Public:
 - [ ] Backend technology chosen (decision 1)
 - [ ] ERD / database fields agreed with the backend member
 - [ ] API contract written: endpoints, field names, responses
-- [ ] Connect sign in and registration
+- [x] Backend from Jhon Lee pulled and running locally (Laravel 13 + Sanctum, `migrate --seed`), 2026-11-09
+- [x] **Connect registration** (`POST /api/register` with Axios; token saved; errors shown per field), tested 2026-11-09
+- [ ] Connect sign in (`POST /api/login`: residents with mobile, staff with email)
 - [ ] Connect household profiles
 - [ ] Connect evacuation centers
 - [ ] Connect relief distribution

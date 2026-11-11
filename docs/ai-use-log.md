@@ -13,5 +13,7 @@ Each member should add their own rows for tools they used.
 | 2026-11-05 | Jhann Clevill | Claude (Anthropic), in VS Code | Reviewed ERD v1 and wrote suggestions (docs/erd-review.md) | *Jhann/Jhon Lee: note which suggestions were accepted* |
 | 2026-11-05 | Jhann Clevill | Claude (Anthropic), in VS Code | Built the Vue frontend draft (13 pages, sample data) based on the Figma prototype | Build check + 17 automated browser tests at 4 screen sizes (docs/test-cases.md). *Jhann: add your own browser check here.* |
 | 2026-11-05 | Jhann Clevill | Vue 3, Vue Router, Vite (open-source, MIT licence) | Frontend framework, page routing, dev server and build | Installed from npm, 0 vulnerabilities reported |
+| 2026-11-09 | Jhann Clevill | Claude (Anthropic), in VS Code | Set up Jhon Lee's Laravel backend locally; connected the Vue registration form to `POST /api/register` with Axios (token saving, error handling) | 6 API tests + 13 browser tests + a database check that passwords are hashed (docs/test-cases.md). *Jhann: add your own check here.* |
+| 2026-11-09 | Jhann Clevill | Axios (open-source, MIT licence) | Sending requests from Vue to the Laravel API | Installed from npm, 0 vulnerabilities reported |
 | 2026-10-15 | Jhann Clevill | Figma Make (Jhon Lee's prototype) | Design reference for colors, layout and screens | Rebuilt by hand in HTML/CSS/JS, not copied |
 | 2026-10-15 | Jhann Clevill | Google Fonts (Manrope, DM Sans) | Fonts on the website | Both fonts use the SIL Open Font License |
