@@ -45,10 +45,12 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 | File | What it is |
 |---|---|
 | `backend/routes/api.php` | All API addresses |
-| `frontend/src/services/api.js` | Axios client (API base URL + login token on every request) |
-| `frontend/src/services/session.js` | Saves the token + user in the browser (`dr_token`, `dr_user`) |
+| `frontend/src/api.js` | Axios client used by all pages (API base URL with a local fallback + login token on every request; a 401 sends you back to sign in) |
+| `frontend/src/utils/mappers.js` | Turns API data into what the pages show; `currentUser()` for the layouts |
+| `frontend/src/router.js` | Pages + guard: signed-out visitors and the wrong role go to the right sign in (token + user saved as `token`, `user` in the browser) |
 | `frontend/src/pages/LoginPage.vue` | Resident sign in + register |
-| `frontend/src/data/sample-data.js` | Fake data still used by most pages (to be replaced by API calls) |
+| `frontend/src/data/sample-data.js` | Fake data still used by 3 staff pages (Evacuation Centers, Relief, SMS Alerts) and a few labels/Purok lists |
+| `frontend/src/services/` | Older API client + session helper; **not imported by any page anymore** |
 | [frontend-data-fields.md](frontend-data-fields.md) | Every field the forms send and the pages show (API contract) |
 | [checklist.md](checklist.md) | What's done / not done |
 | [group-notes.md](group-notes.md) | Decisions from the group chat |
@@ -57,20 +59,21 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Current status (update at the end of each session)
 
-*Last updated: 2026-11-09, desktop (Claude).*
+*Last updated: 2026-11-12, desktop (Claude).*
 
-- Frontend: all 13 pages exist as a draft. **Create account is connected** to `POST /api/register` (tested).
-- **Sign in is still demo.**
-- Backend: pushed by Jhon Lee on Nov 9; runs locally.
+- **Sign in and Create account are connected** (Jhon Lee, Nov 11–12), for residents and staff, with a real Sign out and the user's real name in the menus.
+- **Connected to the API:** resident Home, My Household, Evacuation, Assistance, Alerts; staff Dashboard and Household Profiles.
+- **Still sample data:** staff Evacuation Centers, Relief Distribution, SMS Alerts. The backend endpoints for them already exist (`/evacuation-centers`, `/relief-items`, `/relief-distributions`, `GET`/`POST /sms-alerts`).
+- Agreed in chat (Nov 12): Jhann adds the features on the frontend, Jhon Lee connects them to the backend.
 - Data gathering (surveys) was on Nov 7: results not shared yet.
 - Hosting for the Nov 20 online link: **not decided**.
 
 ## Next tasks (in order)
 
-1. **Connect sign in** to `POST /api/login`: residents send `mobile_number` + `password`, staff send `email` + `password`; the answer is `{ user, token }`. Save the session the same way register does.
-2. Replace the sample data with API calls, page by page (households, evacuation centers, advisories…).
-3. Group: decide **hosting**, assign **Ch 4–5**, collect the **survey results**.
-4. Chapter 3 draft (requirements tables, tech stack, timeline).
+1. Connect the 3 staff pages still on sample data (Evacuation Centers, Relief, SMS Alerts). Agree in the chat who does which page first, so two people don't edit the same file.
+2. Group: decide **hosting** (link due Nov 20), assign **Ch 4–5**, collect the **survey results**.
+3. Chapter 3 draft (requirements tables, tech stack, API endpoints table, timeline). Paper due Nov 19.
+4. Ask Jhon Lee if the unused `frontend/src/services/` folder can be deleted.
 
 ## Rules for AI assistants
 
@@ -91,6 +94,8 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 | Date | Computer / AI | What was done |
 |---|---|---|
+| 2026-11-12 | Desktop / Claude | Pulled Jhon Lee's API-connected frontend (ed3f202) and tested it; added the missing API address fallback in `frontend/src/api.js` (pages failed without a `frontend/.env`); updated README + this file |
+| 2026-11-11 | Desktop / Claude | Fresh setup: pulled 14 commits; installed Laragon 8.8 (PHP 8.3.36, MySQL 8.4.3), enabled PHP `zip`, added PHP/Composer/MySQL to PATH; backend + frontend set up and tested (both demo logins work) |
 | 2026-11-09 | Desktop / Claude | Set up Jhon Lee's backend locally; connected Create account to the API (Axios, token saved, errors per field); 19 tests pass; created this handoff file |
 | 2026-11-06 | Desktop / Claude | Frontend data fields list for Jhon Lee; reviewed the survey questionnaires |
 | 2026-11-05 | Desktop / Claude | ERD review; moved the frontend to Vue (13-page draft with sample data) |

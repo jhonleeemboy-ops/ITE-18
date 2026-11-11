@@ -4,12 +4,12 @@
 
 Group 4 college mini-thesis (ITE 18).
 
-## Current status (2026-11-09)
+## Current status (2026-11-12)
 
 | Part | Status |
 |---|---|
-| Frontend (Vue) | **Draft built and tested.** Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). It uses **sample data only** and isn't connected to a backend yet. |
-| Backend (Laravel 13 + MySQL) | **Added by Jhon Lee (Nov 9)** in `backend/`: Sanctum login tokens, migrations, demo data, API routes. **Resident registration is connected** to it (Nov 9). |
+| Frontend (Vue) | Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). **Connected to the API:** sign in, register, sign out, all 5 resident pages, staff Dashboard and Household Profiles. **Still sample data:** staff Evacuation Centers, Relief Distribution, SMS Alerts. |
+| Backend (Laravel 13 + MySQL) | **Added by Jhon Lee (Nov 9)** in `backend/`: Sanctum login tokens, migrations, demo data, API routes. |
 | SMS | Not started. The provider still needs to be chosen. |
 
 ## How to run the backend (Laravel, first time)
@@ -54,8 +54,9 @@ You need **Node.js** (version 24 LTS) installed.
 
 To stop it, click in the terminal and press **Ctrl + C**.
 
-**Create account is real:** with the backend running, registering saves the account to MySQL and signs you in (the token is kept in the browser).
-**Sign in is still demo:** any valid mobile number with any password opens the sample resident portal; on the staff page, any valid email opens the sample dashboard. Connecting sign-in to `/api/login` is next.
+**Sign in and Create account are real:** the backend must be running. Use the demo accounts above, or register a new resident (saved to MySQL; the token is kept in the browser).
+
+The app talks to the API at `http://127.0.0.1:8000/api` by default. To use another address (for example the online server), copy `.env.example` to `.env` in the `frontend` folder and change `VITE_API_URL`.
 
 To make the final files for hosting: `npm run build` (they appear in `frontend/dist`).
 
@@ -75,7 +76,9 @@ ITE-18
 │       ├── css/                   Plain CSS: base, login, app (shared), portal, staff
 │       ├── data/sample-data.js    ALL the sample data (made up), using the ERD field names
 │       ├── utils/                 Form checks (validation.js) and date/number formatting
-│       ├── services/              api.js (Axios client for the Laravel API) + session.js (saved login token)
+│       ├── api.js                 Axios client for the Laravel API (adds the login token to every request)
+│       ├── utils/mappers.js       Turns API data into what the pages show
+│       ├── services/              Older API client + session helper (not used by any page anymore)
 │       ├── composables/toast.js   The small pop-up message
 │       ├── components/            Reusable pieces: logo, badges, occupancy bar, icons
 │       ├── layouts/               Resident portal frame (top menu), staff frame (side menu)
