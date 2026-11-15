@@ -18,7 +18,7 @@ const latestAdvisory = advisories[0]; // SAMPLE advisory (left side, not connect
 
 // What the user typed in each form
 const signin = reactive({ mobile: "", password: "" });
-const register = reactive({ name: "", mobile: "", password: "", purok: "" });
+const register = reactive({ name: "", mobile: "", password: "", purok: "", members: "" });
 
 // Error message for each field, by field id ("" or missing = no error)
 const errors = reactive({});
@@ -92,7 +92,11 @@ async function submitRegister() {
   errors["register-password"] = newPasswordError(register.password);
   errors["register-purok"] = requiredError(register.purok, "Select your Purok.");
 
-  if (focusFirstError(errors, ["register-name", "register-mobile", "register-password", "register-purok"])) return;
+  const members = Number(register.members);
+  errors["register-members"] =
+    Number.isInteger(members) && members >= 1 && members <= 50 ? "" : "Enter how many people live in your household (1 to 50).";
+
+  if (focusFirstError(errors, ["register-name", "register-mobile", "register-password", "register-purok", "register-members"])) return;
 
   loading.value = true;
   status.value = "";
@@ -103,6 +107,7 @@ async function submitRegister() {
       password: register.password,
       // the API wants a number 1-8, so "Purok 3" becomes 3
       purok: Number(String(register.purok).replace(/\D/g, "")),
+      members, // number of people in the household, including you
     });
     saveLogin(data);
   } catch (e) {
@@ -112,6 +117,7 @@ async function submitRegister() {
       if (apiErrors.mobile_number) errors["register-mobile"] = apiErrors.mobile_number[0];
       if (apiErrors.password) errors["register-password"] = apiErrors.password[0];
       if (apiErrors.purok) errors["register-purok"] = apiErrors.purok[0];
+      if (apiErrors.members) errors["register-members"] = apiErrors.members[0];
     } else {
       status.value = apiMessage(e);
     }
@@ -247,6 +253,17 @@ async function submitRegister() {
               <option v-for="purok in puroks" :key="purok" :value="purok">{{ purok }}</option>
             </select>
             <p v-if="errors['register-purok']" id="register-purok-error" class="field-error">{{ errors["register-purok"] }}</p>
+          </div>
+
+          <div class="field">
+            <label for="register-members">Number of household members</label>
+            <input
+              id="register-members" v-model="register.members" type="number" min="1" max="50" inputmode="numeric"
+              placeholder="Example: 5" aria-describedby="register-members-hint register-members-error"
+              :aria-invalid="errors['register-members'] ? 'true' : null" @input="clearError('register-members')"
+            >
+            <p id="register-members-hint" class="field-hint">Count everyone living in your home, including you.</p>
+            <p v-if="errors['register-members']" id="register-members-error" class="field-error">{{ errors["register-members"] }}</p>
           </div>
 
           <button type="submit" class="btn btn-primary btn-block">Register household <AppIcon name="arrow" /></button>

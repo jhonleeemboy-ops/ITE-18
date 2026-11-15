@@ -35,4 +35,15 @@ return [
         ],
     ],
 
+
+        // SMS gateway (TextBee: an Android phone with a SIM). Leave the key empty to only queue alerts.
+    'textbee' => [
+        'url'    => env('TEXTBEE_URL', 'https://api.textbee.dev'),
+        'key'    => env('TEXTBEE_API_KEY'),
+        'device' => env('TEXTBEE_DEVICE_ID'),
+        'sim'    => env('TEXTBEE_SIM_SLOT'), // 0 = SIM 1, 1 = SIM 2, empty = let TextBee choose
+    ],
+
+
+
 ];

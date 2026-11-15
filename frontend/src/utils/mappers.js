@@ -1,4 +1,4 @@
-// Converts API data into the shape the pages already use (see data/sample-data.js).
+// Converts API data into the shape the pages use.
 const label = (value) => String(value ?? "").replace(/_/g, " ");
 
 export const purokLabel = (n) => `Purok ${n}`;
@@ -56,6 +56,7 @@ export function mapSmsLog(l) {
   return {
     id: l.id, advisory_id: l.advisory_id, title: l.advisory?.title ?? "",
     recipients: l.recipients, sent: l.sent, failed: l.failed, sent_at: l.sent_at,
+    created_at: l.created_at,
   };
 }
 

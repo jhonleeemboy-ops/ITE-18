@@ -4,7 +4,7 @@
 import { onMounted, reactive, ref } from "vue";
 import StatusBadge from "../../components/StatusBadge.vue";
 import api from "../../api";
-import { incidentTypes } from "../../data/sample-data.js"; // only the type labels
+import { incidentTypes } from "../../utils/options.js";
 import { formatDateTime } from "../../utils/format.js";
 import { mapIncident } from "../../utils/mappers.js";
 import { focusFirstError } from "../../utils/validation.js";

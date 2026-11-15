@@ -12,5 +12,14 @@ class Household extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+        
     }
+
+        // The people in the household. Not named "members" because
+    // "members" is already the column that holds the head count.
+    public function familyMembers(): HasMany
+    {
+        return $this->hasMany(HouseholdMember::class);
+    }
+
 }

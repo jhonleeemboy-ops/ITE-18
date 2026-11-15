@@ -438,6 +438,45 @@ a.link-button:hover {
   gap: 0 16px;
 }
 
+/* ---------- Checkbox group (e.g. the Puroks an evacuation center serves) ---------- */
+.check-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+
+.check-group legend {
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--label);
+}
+
+.check-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.check-item input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--teal);
+}
+
+/* The "people arriving or leaving" box on each evacuation center card */
+.count-field {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
 /* ---------- Text areas use the same look as inputs ---------- */
 .field textarea {
   width: 100%;

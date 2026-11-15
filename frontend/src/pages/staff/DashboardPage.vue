@@ -6,7 +6,7 @@ import { RouterLink } from "vue-router";
 import OccupancyMeter from "../../components/OccupancyMeter.vue";
 import StatusBadge from "../../components/StatusBadge.vue";
 import api from "../../api";
-import { incidentTypes } from "../../data/sample-data.js"; // only the type labels
+import { incidentTypes } from "../../utils/options.js";
 import { formatDateTime, formatNumber } from "../../utils/format.js";
 import { mapCenter, mapIncident } from "../../utils/mappers.js";
 

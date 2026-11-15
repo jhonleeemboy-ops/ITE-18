@@ -4,7 +4,6 @@
 import { RouterLink, RouterView, useRoute, useRouter } from "vue-router";
 import AppIcon from "../components/AppIcon.vue";
 import BrandMark from "../components/BrandMark.vue";
-import SampleBanner from "../components/SampleBanner.vue";
 import { currentUser } from "../utils/mappers.js";
 
 const route = useRoute();
@@ -73,8 +72,6 @@ const today = new Date().toLocaleDateString("en-US", {
         <h1>{{ route.meta.title }}</h1>
         <p>{{ today }}</p>
       </div>
-      <!-- Delete this line once EvacuationCenters, Relief and SmsAlerts are connected to the API -->
-      <SampleBanner />
       <RouterView />
     </main>
   </div>

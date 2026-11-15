@@ -17,6 +17,7 @@ class AuthController extends Controller
             'mobile_number' => 'required|string',
             'password'      => 'required|string|min:8',
             'purok'         => 'required|integer|between:1,8',
+            'members'       => 'nullable|integer|min:1|max:50',
         ]);
 
         // normalize 0917… / +63917… / 917… → 9171234567
@@ -37,6 +38,7 @@ class AuthController extends Controller
         $household = Household::create([
             'head_name' => $data['name'],
             'purok'     => $data['purok'],
+            'members'   => $data['members'] ?? 1, // number of people in the household
         ]);
 
         $user = User::create([

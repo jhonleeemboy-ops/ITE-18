@@ -23,6 +23,7 @@ const colors = {
   full: "red",
   failed: "red",
   standby: "gray",
+  queued: "gray",
   low: "gray",
   archived: "gray",
 };
