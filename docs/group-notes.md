@@ -65,6 +65,10 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Fri 2026-11-06 | Paper | After data gathering, aim to draft **Ch 1–3 next week**. Methods are decided; the user feedback is needed to validate the problems. |
 | Mon 2026-11-09 | **Backend pushed** | Jhon Lee pushed the Laravel 13 + MySQL backend (`backend/`): Sanctum token login, 15 migrations, seeders, API routes for register/login, households, centers, advisories, incidents, relief and SMS alerts. He added the relief tables, SMS logs and Purok-to-center links from the ERD review. Jhann connected the registration form to `/api/register`. |
 | Sat 2026-10-31 | Pace | Jhon Lee: don't cram, help each other so everyone can answer the instructor's questions, aim for a little progress every day. Jhann: "hinay hinayon", start **next week** (week of Nov 2). |
+| Nov 2026 | Survey files | Marc shared the survey/interview files in Google Drive. Jhon Lee will process them himself. |
+| Mon 2026-11-16 | **SMS gateway: TextBee** | Jhon Lee pushed the SMS gateway (commit c8cac94). TextBee texts residents through an Android phone with a SIM. To use it: make a TextBee account, generate an API key, paste it in `backend/.env` as `TEXTBEE_API_KEY=`. The same push connected all staff pages and added household members. |
+| Nov 2026 | **Barangay follow-up answers** | Jhon Lee's follow-up questions, answered in chat: **23 Puroks** in Ampayon; about **500+ households** (from the barangay secretary); counting affected families by hand takes **1–2 days**; the official interviewed is the **Barangay Secretary**; evacuation capacity: "1.3k+ individuals, 500+ households" (total, not per center). Jhon Lee also asked the barangay to validate the Figma prototype. |
+| Nov 2026 | **Barangay feedback on the prototype** | Marc: they mentioned going **back**, something like a **home button**; they asked what the **notification on the admin account** is for. Humphrey: something about **inputting households**. Details still being collected. |
 
 ## Still unclear
 
@@ -74,5 +78,8 @@ First names only, because this repo is public. Full names are on the paper's tit
 - **Name spelling:** the correct spelling is "Jhann Clevill" (confirmed 2026-10-20). The paper's title page still says "Jhan" and needs fixing.
 - System roles for Marc Joven and John Humphrey (integration, testing, SMS research, barangay data).
 - What's in the BACKEND Drive folder.
+- **Capacity of each evacuation center** and the real list of centers. Marc confirmed (Nov 16) that "1.3k+ individuals, 500+ households" is the **total** capacity of their evacuation centers, not per center.
+- Whether "500+ households" is all of Ampayon or only the affected/listed families.
+- What the barangay said about household input. (Back/home button: Humphrey said on Nov 16 that they didn't name a screen; they just found it confusing where to go back or home. So it applies to the whole system.)
 - Who writes **Chapter 4 and Chapter 5**. They're in the instructor's template but missing from our Google Doc copy.
 - What the instructor's "Finals Requirements" video says (not reviewed here).

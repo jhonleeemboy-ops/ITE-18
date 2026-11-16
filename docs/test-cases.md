@@ -1,5 +1,35 @@
 # Test cases and results
 
+## TextBee SMS, household members, staff pages (Jhon Lee's update c8cac94)
+
+**Tested:** 2026-11-16, on the desktop. Backend on http://127.0.0.1:8000 (Laragon MySQL 8.4, demo data, new `household_members` migration run). **No TextBee key** in `.env`, so no real SMS was sent.
+**How:** API calls with PowerShell (`Invoke-WebRequest`) as the demo staff and resident, then `npm run build`. Test records (one alert, one member, one check-in) were removed or reversed afterwards.
+**Not tested yet:** sending a real SMS through TextBee (needs an account, API key and an Android phone with a SIM); clicking through the new pages in a browser. *Jhann: add your own browser check here.*
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| N01 | `GET /advisories/latest` without signing in | 200 with the newest active advisory | Pass |
+| N02 | Staff sends an alert with no TextBee key | 201; advisory saved; `sms.configured` false; `sent` 0, `sent_at` empty (no SMS claimed) | Pass |
+| N03 | Resident sends an alert | 403 | Pass |
+| N04 | Resident deletes an alert | 403 | Pass |
+| N05 | Staff deletes the alert from N02 | 204, and the advisory no longer appears for residents | Pass |
+| N06 | Check in more people than the space left in a center | 422 "Only 300 places left in this center." | Pass |
+| N07 | Check in 1 person | 200, occupants 0 → 1 | Pass |
+| N08 | Check out 1 person | 200, back to 0 | Pass |
+| N09 | Resident checks people in | 403 | Pass |
+| N10 | Resident lists their own household members | 200 | Pass |
+| N11 | Resident adds a member (age 70, PWD) | 201 | Pass |
+| N12 | Resident lists another household's members | 403 | Pass |
+| N13 | Resident deletes the member from N11 | 204 | Pass |
+| N14 | Staff adds a household in Purok 23 | Accepted (Ampayon has 23 Puroks) | **Fail:** 422 "The purok field must be between 1 and 8." |
+| N15 | Resident registers in Purok 23 | Accepted | **Fail:** same 422 |
+| N16 | Staff sends an alert to Purok 23 | Accepted | **Fail:** 422 "Invalid Purok." |
+| N17 | `npm run build` | No errors | Pass |
+
+N14–N16 fail because the system was built for Purok 1–8 (from the Figma prototype). The barangay says Ampayon has 23 Puroks.
+
+---
+
 ## Frontend connected to the API (Jhon Lee's update) + API address fallback
 
 **Tested:** 2026-11-12, on the desktop, with commit ed3f202 (Jhon Lee) + the fallback fix. Backend on http://127.0.0.1:8000 (Laragon MySQL 8.4, seeded demo data), Vue app on http://localhost:5173.

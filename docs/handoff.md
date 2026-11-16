@@ -38,6 +38,8 @@ Grading: paper 15%, system 30%, presentation 20%, **individual backend debugging
 2. `cd backend` → `php artisan migrate` (only if someone added a migration) → `php artisan serve --port=8000`
 3. In a second terminal: `cd frontend` → `npm install` (only if package.json changed) → `npm run dev` → http://localhost:5173
 
+**SMS (TextBee):** to really send texts, make a TextBee account, install the TextBee app on an Android phone with a SIM, generate an API key and put it in `backend/.env` as `TEXTBEE_API_KEY=` (optional: `TEXTBEE_DEVICE_ID`, `TEXTBEE_SIM_SLOT`). Never commit the key. With the key empty, alerts are still saved and shown in the portal, but no text is sent, and the page says so.
+
 Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@brgy.test`, resident mobile `09171234567`.
 
 ## Key files
@@ -49,7 +51,9 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 | `frontend/src/utils/mappers.js` | Turns API data into what the pages show; `currentUser()` for the layouts |
 | `frontend/src/router.js` | Pages + guard: signed-out visitors and the wrong role go to the right sign in (token + user saved as `token`, `user` in the browser) |
 | `frontend/src/pages/LoginPage.vue` | Resident sign in + register |
-| `frontend/src/data/sample-data.js` | Fake data still used by 3 staff pages (Evacuation Centers, Relief, SMS Alerts) and a few labels/Purok lists |
+| `backend/app/Services/SmsSender.php` | Sends alerts through TextBee; turns gateway errors into messages staff understand |
+| `frontend/src/utils/options.js` | Fixed choices shared by pages: Purok list, request types, advisory levels |
+| `frontend/src/data/sample-data.js` | Fake data, now only used by the sign-in page (advisory on the left + Purok list) |
 | `frontend/src/services/` | Older API client + session helper; **not imported by any page anymore** |
 | [frontend-data-fields.md](frontend-data-fields.md) | Every field the forms send and the pages show (API contract) |
 | [checklist.md](checklist.md) | What's done / not done |
@@ -59,21 +63,25 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Current status (update at the end of each session)
 
-*Last updated: 2026-11-12, desktop (Claude).*
+*Last updated: 2026-11-16, desktop (Claude).*
 
-- **Sign in and Create account are connected** (Jhon Lee, Nov 11–12), for residents and staff, with a real Sign out and the user's real name in the menus.
-- **Connected to the API:** resident Home, My Household, Evacuation, Assistance, Alerts; staff Dashboard and Household Profiles.
-- **Still sample data:** staff Evacuation Centers, Relief Distribution, SMS Alerts. The backend endpoints for them already exist (`/evacuation-centers`, `/relief-items`, `/relief-distributions`, `GET`/`POST /sms-alerts`).
-- Agreed in chat (Nov 12): Jhann adds the features on the frontend, Jhon Lee connects them to the backend.
-- Data gathering (surveys) was on Nov 7: results not shared yet.
+- **Every page is connected to the API** (Jhon Lee, commit c8cac94, Nov 16). New: SMS through **TextBee**, household members (name, age, relationship, PWD), residents can edit their household, staff can add households, staff can add centers and check people in/out, staff can delete an alert. API tests N01–N16 pass; see [test-cases.md](test-cases.md).
+- **Ampayon has 23 Puroks** (barangay secretary, via Marc). The system still only accepts **Purok 1–8** (5 backend checks, the seeder, `options.js`, `sample-data.js`). Must be fixed.
+- The sign-in page still shows a **sample** advisory. The public endpoint `GET /api/advisories/latest` exists but the page doesn't use it yet.
+- No staff page yet to update assistance requests (the API has `PATCH /incidents/{id}` and notes).
+- No sign-out endpoint and login tokens never expire (`config/sanctum.php`: `'expiration' => null`).
+- Barangay feedback on the prototype: wants a **back/home button**; asked what the **admin notification** is for; something about **inputting households** (details unclear).
 - Hosting for the Nov 20 online link: **not decided**.
+- Chapter 3 draft (system parts): [chapter3-draft.md](chapter3-draft.md).
 
 ## Next tasks (in order)
 
-1. Connect the 3 staff pages still on sample data (Evacuation Centers, Relief, SMS Alerts). Agree in the chat who does which page first, so two people don't edit the same file.
-2. Group: decide **hosting** (link due Nov 20), assign **Ch 4–5**, collect the **survey results**.
-3. Chapter 3 draft (requirements tables, tech stack, API endpoints table, timeline). Paper due Nov 19.
-4. Ask Jhon Lee if the unused `frontend/src/services/` folder can be deleted.
+1. **Purok 1–8 → 1–23** in backend and frontend. Agree in the chat who does it.
+2. Group: decide **hosting** (link due Nov 20), assign **Ch 4–5**.
+3. Barangay feedback: a clear back/home button on **every** page (Humphrey: they didn't name a screen, it was just confusing where to go back). Household input: details still unclear. The admin notification was only in the Figma prototype.
+4. Sign-in page advisory → `GET /advisories/latest`; staff page for assistance requests; sign out on the server.
+5. Finish Chapter 3 (paper due Nov 19); check that its tables still match the code.
+6. Ask Jhon Lee if the unused `frontend/src/services/` folder can be deleted; remove the duplicate `PUT /households/{household}` line in `routes/api.php`.
 
 ## Rules for AI assistants
 
@@ -94,6 +102,8 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 | Date | Computer / AI | What was done |
 |---|---|---|
+| 2026-11-16 | Desktop / Claude | Pulled Jhon Lee's TextBee + staff pages update (c8cac94), ran the new migration, added empty TextBee keys to the local `.env`, 16 API tests + build; recorded the barangay's follow-up answers (23 Puroks) and feedback; updated the Ch 3 draft |
+| 2026-11-13 | Desktop / Claude | Chapter 3 draft of the system parts (`docs/chapter3-draft.md`) |
 | 2026-11-12 | Desktop / Claude | Pulled Jhon Lee's API-connected frontend (ed3f202) and tested it; added the missing API address fallback in `frontend/src/api.js` (pages failed without a `frontend/.env`); updated README + this file |
 | 2026-11-11 | Desktop / Claude | Fresh setup: pulled 14 commits; installed Laragon 8.8 (PHP 8.3.36, MySQL 8.4.3), enabled PHP `zip`, added PHP/Composer/MySQL to PATH; backend + frontend set up and tested (both demo logins work) |
 | 2026-11-09 | Desktop / Claude | Set up Jhon Lee's backend locally; connected Create account to the API (Axios, token saved, errors per field); 19 tests pass; created this handoff file |
