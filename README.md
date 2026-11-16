@@ -4,13 +4,14 @@
 
 Group 4 college mini-thesis (ITE 18).
 
-## Current status (2026-11-12)
+## Current status (2026-11-16)
 
 | Part | Status |
 |---|---|
-| Frontend (Vue) | Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). **Connected to the API:** sign in, register, sign out, all 5 resident pages, staff Dashboard and Household Profiles. **Still sample data:** staff Evacuation Centers, Relief Distribution, SMS Alerts. |
-| Backend (Laravel 13 + MySQL) | **Added by Jhon Lee (Nov 9)** in `backend/`: Sanctum login tokens, migrations, demo data, API routes. |
-| SMS | Not started. The provider still needs to be chosen. |
+| Frontend (Vue) | Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). **All pages are connected to the API.** Only the advisory on the sign-in page is still sample data. |
+| Backend (Laravel 13 + MySQL) | By Jhon Lee in `backend/`: Sanctum login tokens, migrations, demo data, API routes, household members, evacuation check-in/out. |
+| SMS | **TextBee** gateway (Jhon Lee, Nov 16): an Android phone with a SIM sends the alerts. Needs a TextBee API key in `backend/.env`; without it, alerts are saved but not texted. |
+| Known gap | The system accepts Purok 1–8, but Ampayon has **23 Puroks** (barangay secretary). To be fixed. |
 
 ## How to run the backend (Laravel, first time)
 
@@ -89,6 +90,8 @@ ITE-18
     ├── checklist.md               Phase checklist and group task list
     ├── group-notes.md             Members, roles, deadlines and what the group agreed in chat
     ├── thesis-requirements.md     Paper template + grading rubric summary + Chapter 3 checklist
+    ├── chapter3-draft.md          Chapter 3 draft: requirements, API endpoints, technologies
+    ├── reviewer.md                Oral recitation reviewer: how the system works + practice questions
     ├── erd-review.md              Review of ERD v1 with suggestions
     ├── ai-use-log.md              Record of AI/tools used, for the paper's Declaration page
     ├── prototype-notes.md         What each Figma screen contains, design colors and fonts
