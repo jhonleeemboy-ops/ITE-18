@@ -102,7 +102,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 | Date | Computer / AI | What was done |
 |---|---|---|
-| 2026-11-16 | Desktop / Claude | Back to Home/Dashboard links on every page + real advisory on the sign-in page; 14 browser checks (B01–B14); oral recitation reviewer (`docs/reviewer.md`) |
+| 2026-11-16 | Desktop / Claude | Back to Home/Dashboard links on every page + real advisory on the sign-in page; 14 browser checks (B01–B14) |
 | 2026-11-16 | Desktop / Claude | Pulled Jhon Lee's TextBee + staff pages update (c8cac94), ran the new migration, added empty TextBee keys to the local `.env`, 16 API tests + build; recorded the barangay's follow-up answers (23 Puroks) and feedback; updated the Ch 3 draft |
 | 2026-11-13 | Desktop / Claude | Chapter 3 draft of the system parts (`docs/chapter3-draft.md`) |
 | 2026-11-12 | Desktop / Claude | Pulled Jhon Lee's API-connected frontend (ed3f202) and tested it; added the missing API address fallback in `frontend/src/api.js` (pages failed without a `frontend/.env`); updated README + this file |

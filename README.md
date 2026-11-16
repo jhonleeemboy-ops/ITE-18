@@ -91,7 +91,6 @@ ITE-18
     ├── group-notes.md             Members, roles, deadlines and what the group agreed in chat
     ├── thesis-requirements.md     Paper template + grading rubric summary + Chapter 3 checklist
     ├── chapter3-draft.md          Chapter 3 draft: requirements, API endpoints, technologies
-    ├── reviewer.md                Oral recitation reviewer: how the system works + practice questions
     ├── erd-review.md              Review of ERD v1 with suggestions
     ├── ai-use-log.md              Record of AI/tools used, for the paper's Declaration page
     ├── prototype-notes.md         What each Figma screen contains, design colors and fonts
