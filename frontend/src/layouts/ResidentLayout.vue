@@ -2,12 +2,17 @@
 // The frame around every resident portal page: header + top menu.
 // The page itself appears where <RouterView /> is.
 import { computed } from "vue";
-import { RouterLink, RouterView, useRouter } from "vue-router";
+import { RouterLink, RouterView, useRoute, useRouter } from "vue-router";
 import AppIcon from "../components/AppIcon.vue";
 import BrandMark from "../components/BrandMark.vue";
 import { currentUser } from "../utils/mappers.js";
 
+const route = useRoute();
 const router = useRouter();
+
+// Barangay feedback: it was confusing where to go back. Every page except Home
+// gets a "Back to Home" link at the top.
+const onHome = computed(() => route.path === "/resident/home");
 
 // The real signed-in user saved at sign in
 const displayName = currentUser()?.name || "Resident";
@@ -57,6 +62,9 @@ const initials = computed(() =>
     </header>
 
     <main class="portal-main">
+      <RouterLink v-if="!onHome" to="/resident/home" class="back-link">
+        <AppIcon name="back" /> Back to Home
+      </RouterLink>
       <RouterView />
     </main>
   </div>

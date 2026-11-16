@@ -68,6 +68,10 @@ const today = new Date().toLocaleDateString("en-US", {
     </aside>
 
     <main class="staff-main">
+      <!-- Barangay feedback: it was confusing where to go back. Every page except the Dashboard gets this link. -->
+      <RouterLink v-if="route.path !== '/staff/dashboard'" to="/staff/dashboard" class="back-link">
+        <AppIcon name="back" /> Back to Dashboard
+      </RouterLink>
       <div class="staff-topbar">
         <h1>{{ route.meta.title }}</h1>
         <p>{{ today }}</p>

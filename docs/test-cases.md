@@ -1,5 +1,32 @@
 # Test cases and results
 
+## "Back to Home / Dashboard" links + real advisory on the sign-in page
+
+**Tested:** 2026-11-16, on the desktop, with the backend and the Vue dev server running (demo data).
+**How:** automated browser test (Playwright with Microsoft Edge, headless) at 1440px and 375px wide, signing in through the real forms; then `npm run build`.
+**Why:** barangay feedback on the prototype: it was confusing where to go back or home (no specific screen).
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| B01 | Open the sign-in page | Shows the newest active advisory from `GET /advisories/latest` | Pass (both widths) |
+| B02 | Same | No "Sample" tag anymore | Pass |
+| B03 | Resident Home | No back link (you are already home) | Pass |
+| B04 | Resident My Household, Evacuation, Assistance, Alerts | "Back to Home" at the top | Pass (4/4, both widths) |
+| B05 | Same pages | No sideways scrolling | Pass |
+| B06 | Click "Back to Home" | Home opens | Pass |
+| B07 | Staff Dashboard | No back link | Pass |
+| B08 | Staff Household Profiles, Evacuation Centers, Relief, SMS Alerts | "Back to Dashboard" at the top | Pass (4/4, both widths) |
+| B09 | Same pages | No sideways scrolling | Pass |
+| B10 | Click "Back to Dashboard" | Dashboard opens | Pass |
+| B11 | Sign-in page when the API can't be reached | Advisory box hidden; sign-in form still works | Pass |
+| B12 | Sign-in page when there is no active advisory (API sends `{}`) | Advisory box hidden | Pass |
+| B13 | Browser console during all tests | No errors | Pass |
+| B14 | `npm run build` | No errors | Pass |
+
+Also removed: the old note under the sign-in form ("Demo: sign-in isn't connected to the server yet…"), because sign in is real now and the note was no longer true.
+
+---
+
 ## TextBee SMS, household members, staff pages (Jhon Lee's update c8cac94)
 
 **Tested:** 2026-11-16, on the desktop. Backend on http://127.0.0.1:8000 (Laragon MySQL 8.4, demo data, new `household_members` migration run). **No TextBee key** in `.env`, so no real SMS was sent.

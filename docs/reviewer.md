@@ -251,7 +251,7 @@ Cover the answers and try first.
 18. **How does the center status change?** Empty = standby, 90% or more = near capacity, otherwise open. It's computed after every check-in or check-out.
 19. **How do you stop two staff from giving the same last bag of rice?** The row is locked during the transaction, so the second request sees the new stock and is refused.
 20. **How did you gather requirements?** Survey and interview at the Ampayon Barangay Hall, and feedback on the Figma prototype.
-21. **What feedback did the barangay give?** It was confusing where to go back or home, they asked what the admin notification was for, and something about inputting households.
+21. **What feedback did the barangay give, and what did you do?** It was confusing where to go back or home, so we added a "Back to Home" / "Back to Dashboard" link at the top of every page. They also asked what the admin notification was for (it was only in the Figma prototype, not in the system), and something about inputting households (details still unclear; staff can already add households for families without an account).
 22. **How do you keep secrets safe?** In `.env`, which is never uploaded to GitHub.
 23. **How did you test?** API tests per role, browser tests at different screen sizes, and database checks. Results are in `docs/test-cases.md`.
 24. **What would you improve next?** 23 Puroks, a logout that cancels the token, a summary report, and confirmed hotlines and centers.

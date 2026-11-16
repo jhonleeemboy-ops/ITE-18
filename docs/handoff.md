@@ -53,7 +53,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 | `frontend/src/pages/LoginPage.vue` | Resident sign in + register |
 | `backend/app/Services/SmsSender.php` | Sends alerts through TextBee; turns gateway errors into messages staff understand |
 | `frontend/src/utils/options.js` | Fixed choices shared by pages: Purok list, request types, advisory levels |
-| `frontend/src/data/sample-data.js` | Fake data, now only used by the sign-in page (advisory on the left + Purok list) |
+| `frontend/src/data/sample-data.js` | Old fake data. **No page imports it anymore** (can be deleted once the group agrees) |
 | `frontend/src/services/` | Older API client + session helper; **not imported by any page anymore** |
 | [frontend-data-fields.md](frontend-data-fields.md) | Every field the forms send and the pages show (API contract) |
 | [checklist.md](checklist.md) | What's done / not done |
@@ -67,7 +67,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 - **Every page is connected to the API** (Jhon Lee, commit c8cac94, Nov 16). New: SMS through **TextBee**, household members (name, age, relationship, PWD), residents can edit their household, staff can add households, staff can add centers and check people in/out, staff can delete an alert. API tests N01–N16 pass; see [test-cases.md](test-cases.md).
 - **Ampayon has 23 Puroks** (barangay secretary, via Marc). The system still only accepts **Purok 1–8** (5 backend checks, the seeder, `options.js`, `sample-data.js`). Must be fixed.
-- The sign-in page still shows a **sample** advisory. The public endpoint `GET /api/advisories/latest` exists but the page doesn't use it yet.
+- The sign-in page now shows the **real** newest advisory (`GET /api/advisories/latest`), and every page except Home/Dashboard has a **Back to Home / Back to Dashboard** link (barangay feedback). Tests B01–B14.
 - No staff page yet to update assistance requests (the API has `PATCH /incidents/{id}` and notes).
 - No sign-out endpoint and login tokens never expire (`config/sanctum.php`: `'expiration' => null`).
 - Barangay feedback on the prototype: wants a **back/home button**; asked what the **admin notification** is for; something about **inputting households** (details unclear).
@@ -78,8 +78,8 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 1. **Purok 1–8 → 1–23** in backend and frontend. Agree in the chat who does it.
 2. Group: decide **hosting** (link due Nov 20), assign **Ch 4–5**.
-3. Barangay feedback: a clear back/home button on **every** page (Humphrey: they didn't name a screen, it was just confusing where to go back). Household input: details still unclear. The admin notification was only in the Figma prototype.
-4. Sign-in page advisory → `GET /advisories/latest`; staff page for assistance requests; sign out on the server.
+3. Barangay feedback on household input: details still unclear. (Back/home: done. The admin notification was only in the Figma prototype.)
+4. Staff page for assistance requests; sign out on the server.
 5. Finish Chapter 3 (paper due Nov 19); check that its tables still match the code.
 6. Ask Jhon Lee if the unused `frontend/src/services/` folder can be deleted; remove the duplicate `PUT /households/{household}` line in `routes/api.php`.
 
@@ -102,6 +102,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 | Date | Computer / AI | What was done |
 |---|---|---|
+| 2026-11-16 | Desktop / Claude | Back to Home/Dashboard links on every page + real advisory on the sign-in page; 14 browser checks (B01–B14); oral recitation reviewer (`docs/reviewer.md`) |
 | 2026-11-16 | Desktop / Claude | Pulled Jhon Lee's TextBee + staff pages update (c8cac94), ran the new migration, added empty TextBee keys to the local `.env`, 16 API tests + build; recorded the barangay's follow-up answers (23 Puroks) and feedback; updated the Ch 3 draft |
 | 2026-11-13 | Desktop / Claude | Chapter 3 draft of the system parts (`docs/chapter3-draft.md`) |
 | 2026-11-12 | Desktop / Claude | Pulled Jhon Lee's API-connected frontend (ed3f202) and tested it; added the missing API address fallback in `frontend/src/api.js` (pages failed without a `frontend/.env`); updated README + this file |

@@ -8,7 +8,7 @@ Group 4 college mini-thesis (ITE 18).
 
 | Part | Status |
 |---|---|
-| Frontend (Vue) | Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). **All pages are connected to the API.** Only the advisory on the sign-in page is still sample data. |
+| Frontend (Vue) | Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). **All pages are connected to the API**, including the advisory on the sign-in page. Every page has a Back to Home / Back to Dashboard link. |
 | Backend (Laravel 13 + MySQL) | By Jhon Lee in `backend/`: Sanctum login tokens, migrations, demo data, API routes, household members, evacuation check-in/out. |
 | SMS | **TextBee** gateway (Jhon Lee, Nov 16): an Android phone with a SIM sends the alerts. Needs a TextBee API key in `backend/.env`; without it, alerts are saved but not texted. |
 | Known gap | The system accepts Purok 1–8, but Ampayon has **23 Puroks** (barangay secretary). To be fixed. |

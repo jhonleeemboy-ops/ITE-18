@@ -1,11 +1,11 @@
 <script setup>
 // Resident sign in + create account (one page, two forms).
 // Connected to the Laravel API: POST /login and POST /register.
-import { computed, nextTick, reactive, ref, watch } from "vue";
+import { computed, nextTick, onMounted, reactive, ref, watch } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import AppIcon from "../components/AppIcon.vue";
 import BrandMark from "../components/BrandMark.vue";
-import { advisories, puroks } from "../data/sample-data.js";
+import { puroks } from "../utils/options.js";
 import { showToast } from "../composables/toast.js";
 import { focusFirstError, mobileError, newPasswordError, requiredError } from "../utils/validation.js";
 import api from "../api";
@@ -14,7 +14,21 @@ const props = defineProps({ mode: { type: String, default: "signin" } });
 const router = useRouter();
 
 const isRegister = computed(() => props.mode === "register");
-const latestAdvisory = advisories[0]; // SAMPLE advisory (left side, not connected yet)
+
+// The barangay's newest active advisory, shown on the left side.
+// GET /advisories/latest is public (no sign in needed).
+// null = no active advisory or the server can't be reached, so the box is hidden.
+const latestAdvisory = ref(null);
+
+onMounted(async () => {
+  try {
+    const { data } = await api.get("/advisories/latest");
+    // with no active advisory the API sends an empty object, so check for a title
+    latestAdvisory.value = data?.title ? data : null;
+  } catch {
+    latestAdvisory.value = null;
+  }
+});
 
 // What the user typed in each form
 const signin = reactive({ mobile: "", password: "" });
@@ -140,17 +154,16 @@ async function submitRegister() {
     <main class="login-layout">
       <!-- Left side: welcome message and current advisory -->
       <section class="intro" aria-labelledby="page-title">
-        <p class="chip chip-warning">{{ latestAdvisory.title }} active</p>
+        <p v-if="latestAdvisory" class="chip chip-warning">Active advisory</p>
         <h1 id="page-title">One community.<br>Ready for anything.</h1>
         <p class="lead">Get official alerts, manage your household profile, find evacuation centers, and request emergency assistance.</p>
 
-        <div class="alert alert-warning">
+        <div v-if="latestAdvisory" class="alert alert-warning">
           <span class="alert-icon" aria-hidden="true">!</span>
           <div class="alert-body">
             <p class="alert-title">{{ latestAdvisory.title }}</p>
             <p class="alert-text">{{ latestAdvisory.message }}</p>
           </div>
-          <span class="sample-tag">Sample</span>
         </div>
 
         <div class="quick-links">
@@ -275,10 +288,6 @@ async function submitRegister() {
           </p>
         </form>
 
-        <p class="prototype-note">
-          <AppIcon name="shield" />
-          Demo: sign-in isn't connected to the server yet. Any valid mobile number opens the sample portal.
-        </p>
       </section>
     </main>
   </div>

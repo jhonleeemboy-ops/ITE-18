@@ -47,7 +47,7 @@ Priorities use MoSCoW: **Must** (the system fails without it), **Should** (impor
 | FR-25 | The system shall let a resident correct their household details (household head, Purok, number of members). | Resident, Staff | Should | The changes appear on the staff household list. A resident cannot edit another household. | *Done for residents; staff can do it through the API only* |
 | FR-26 | The system shall let staff add an evacuation center with its capacity and the Puroks it serves. | Staff | Should | The new center appears on the resident Evacuation page. A duplicate name is refused. | *Done* |
 | FR-27 | The system shall let staff delete an alert, removing it from the resident portal. | Staff | Should | The deleted alert no longer appears for residents. Texts already sent cannot be recalled. | *Done (tests N04–N05)* |
-| FR-28 | The system shall show the newest active advisory on the sign-in page, without signing in. | Public | Could | The sign-in page shows the same advisory as the resident Alerts page. | *API done (test N01); the sign-in page still shows a sample advisory* |
+| FR-28 | The system shall show the newest active advisory on the sign-in page, without signing in. | Public | Could | The sign-in page shows the same advisory as the resident Alerts page. | *Done (tests N01, B01, B11, B12)* |
 
 ---
 
@@ -70,6 +70,7 @@ Priorities use MoSCoW: **Must** (the system fails without it), **Should** (impor
 | NFR-11 | Usability | The system shall reach a System Usability Scale (SUS) score of at least 68 (the commonly used average) with residents and barangay staff. | SUS questionnaire after the users try the system. | *Target. Part of the evaluation plan (3.9).* |
 | NFR-12 | Performance | Lists and the dashboard shall load within 3 seconds on the deployed server over a mobile data connection. | Timed page loads on the deployed link. | *Target. Can only be measured after hosting.* |
 | NFR-13 | Availability | The system shall be online at a public link from November 20, 2026. | The link opens from a phone on mobile data. | *Hosting not decided yet* |
+| NFR-14 | Usability | Every page shall have a clear way back to the Home page (residents) or the Dashboard (staff). | Each page except Home/Dashboard shows a "Back to…" link that opens it. | *Done (tests B03–B10). Added because the barangay found it confusing where to go back.* |
 
 ---
 
