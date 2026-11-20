@@ -4,7 +4,7 @@ Last updated: 2026-10-15
 
 A box is ticked only after the item has been checked and works. See [test-cases.md](test-cases.md) for test results.
 
-**Deadlines:** paper soft copy **Nov 19, 2026**; link of the working (online) system **Nov 20, 2026, 11:59 PM**. What the template requires is listed in [thesis-requirements.md](thesis-requirements.md).
+**Deadlines (extended):** paper soft copy and link of the working (online) system, both **Nov 26, 2026** (instructor's sheet closes Nov 27). What the template requires is listed in [thesis-requirements.md](thesis-requirements.md).
 
 ## Phase 1: Project organization
 
@@ -106,7 +106,7 @@ Members and agreements so far: see [group-notes.md](group-notes.md).
 | Login page (sign in + create account) | Frontend | Jhann Clevill | Done (frontend only) | None | Check it on a real phone |
 | Paper split | Coordination | Jhon Lee | Done: Ch 1 Marc Joven, Ch 2 John Humphrey, Ch 3 Jhann Clevill + Jhon Lee | None | Drafts first |
 | Chapter 3 draft | Paper | Jhann Clevill + Jhon Lee | Not started | ERD, API contract | Use [thesis-requirements.md](thesis-requirements.md) checklist |
-| Hosting for the online system (due Nov 20) | Backend | Jhon Lee + Jhann Clevill | Not started | Backend choice | Pick a host for backend + database |
+| Hosting for the online system (due Nov 26) | Backend | Jhon Lee + Jhann Clevill | Not started | Backend choice | Pick a host for backend + database |
 | AI/tool use log for the Declaration | Paper | Everyone | Started ([ai-use-log.md](ai-use-log.md)) | None | Each member adds their own rows |
 | System roles for Marc Joven and John Humphrey | Coordination | Jhann Clevill | Open | None | Ask after Marc's CSC presentation |
 | Backend language | Backend | Jhon Lee | Node.js agreed in chat | None | Confirm Express.js + which database |

@@ -20,8 +20,7 @@ The repo is public: **first names only** here, and **no secrets** (passwords, `.
 
 | When | What |
 |---|---|
-| **Nov 19, 2026** | Paper soft copy |
-| **Nov 20, 2026, 11:59 PM** | Link of the working system (**must be online**) |
+| **Nov 26, 2026** | Paper soft copy **and** link of the working system (**must be online**). Paste both links in the instructor's Excel sheet and check that they open; the sheet closes Nov 27. (Extended on Nov 20; the old dates were Nov 19 and Nov 20.) |
 | Nov 23 – Dec 15 | Presentation + individual backend debugging exam (our slot likely Dec 7) |
 
 Grading: paper 15%, system 30%, presentation 20%, **individual backend debugging 35%**. GitHub history counts per person. Details: [thesis-requirements.md](thesis-requirements.md).
@@ -63,24 +62,25 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Current status (update at the end of each session)
 
-*Last updated: 2026-11-16, desktop (Claude).*
+*Last updated: 2026-11-21, desktop (Claude).*
 
 - **Every page is connected to the API** (Jhon Lee, commit c8cac94, Nov 16). New: SMS through **TextBee**, household members (name, age, relationship, PWD), residents can edit their household, staff can add households, staff can add centers and check people in/out, staff can delete an alert. API tests N01–N16 pass; see [test-cases.md](test-cases.md).
-- **Ampayon has 23 Puroks** (barangay secretary, via Marc). The system still only accepts **Purok 1–8** (5 backend checks, the seeder, `options.js`, `sample-data.js`). Must be fixed.
+- **Purok 1–23 works** (Nov 21; Ampayon has 23 Puroks, barangay secretary). The API checks are in `AuthController`, `HouseholdController` (2), `EvacuationCenterController` and `SmsAlertController`; every Purok list in the frontend comes from `options.js`. The demo data still only uses Purok 1–8. Tests P01–P19.
 - The sign-in page now shows the **real** newest advisory (`GET /api/advisories/latest`), and every page except Home/Dashboard has a **Back to Home / Back to Dashboard** link (barangay feedback). Tests B01–B14.
 - No staff page yet to update assistance requests (the API has `PATCH /incidents/{id}` and notes).
 - No sign-out endpoint and login tokens never expire (`config/sanctum.php`: `'expiration' => null`).
 - Barangay feedback on the prototype: wants a **back/home button**; asked what the **admin notification** is for; something about **inputting households** (details unclear).
-- Hosting for the Nov 20 online link: **not decided**.
+- Hosting for the Nov 26 online link: **not decided**.
+- **Jhon Lee is busy** with another thesis defense the week of Nov 23. The rest of the group handles the paper and keeps him updated (Nov 20).
 - Chapter 3 draft (system parts): [chapter3-draft.md](chapter3-draft.md).
 
 ## Next tasks (in order)
 
-1. **Purok 1–8 → 1–23** in backend and frontend. Agree in the chat who does it.
-2. Group: decide **hosting** (link due Nov 20), assign **Ch 4–5**.
+1. Group: decide **hosting** (link due Nov 26), assign **Ch 4–5**.
+2. Fill the blanks in the Google Doc's Ch 3 (sprint dates, Figures 2–5, licences, consent, "not deployed" sentence, name spelling "Jhann").
 3. Barangay feedback on household input: details still unclear. (Back/home: done. The admin notification was only in the Figma prototype.)
 4. Staff page for assistance requests; sign out on the server.
-5. Finish Chapter 3 (paper due Nov 19); check that its tables still match the code.
+5. Finish Chapter 3 (paper due Nov 26); check that its tables still match the code.
 6. Ask Jhon Lee if the unused `frontend/src/services/` folder can be deleted; remove the duplicate `PUT /households/{household}` line in `routes/api.php`.
 
 ## Rules for AI assistants
@@ -102,6 +102,8 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 | Date | Computer / AI | What was done |
 |---|---|---|
+| 2026-11-21 | Desktop / Claude | Purok 1–8 → 1–23 in the API (5 checks) and the frontend (all lists from `options.js`); 12 API tests + 7 browser checks at 2 widths + build (P01–P19) |
+| 2026-11-20 | Desktop / Claude | Recorded the deadline extension (paper + system due Nov 26) and that Jhon Lee is busy until his defense; reviewed the Google Doc against the code (Purok 1–23 claim still not true in the code) |
 | 2026-11-16 | Desktop / Claude | Back to Home/Dashboard links on every page + real advisory on the sign-in page; 14 browser checks (B01–B14) |
 | 2026-11-16 | Desktop / Claude | Pulled Jhon Lee's TextBee + staff pages update (c8cac94), ran the new migration, added empty TextBee keys to the local `.env`, 16 API tests + build; recorded the barangay's follow-up answers (23 Puroks) and feedback; updated the Ch 3 draft |
 | 2026-11-13 | Desktop / Claude | Chapter 3 draft of the system parts (`docs/chapter3-draft.md`) |

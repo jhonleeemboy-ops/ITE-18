@@ -4,8 +4,8 @@ Summary of "ITE18_Mini-Thesis_Paper_Template.docx" (ITE 18, Applications Develop
 
 ## Deadlines (instructor announcement, Oct 15)
 
-- Paper soft copy: **November 19, 2026**
-- Link of the functional and usable system: **November 20, 2026, 11:59 PM** (the link closes afterwards)
+- **Extended (instructor, Nov 20):** paper soft copy and link of the functional and usable system are both due **November 26, 2026**. Paste both links in the instructor's Excel sheet and make sure they open; the sheet closes **November 27**.
+- Original dates: paper Nov 19, system link Nov 20, 11:59 PM.
 - Presentation of the final project + **individual hands-on debugging**: **November 23 to December 15, 2026**. Our slot is most likely **Dec 7** (the date Jhon Lee entered in the scheduling sheet).
 
 **The system must be online (deployed), not just running on a laptop.**

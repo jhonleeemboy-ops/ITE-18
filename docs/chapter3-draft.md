@@ -14,13 +14,13 @@
 
 Priorities use MoSCoW: **Must** (the system fails without it), **Should** (important, but the system still works without it), **Could** (only if there is time).
 
-*The "Now" column is for the group, not the paper. Every **Must** has to work end to end for every role by Nov 20 (rubric B). If one can't be finished, we should lower its priority honestly rather than claim it.*
+*The "Now" column is for the group, not the paper. Every **Must** has to work end to end for every role by Nov 26 (rubric B; deadline extended from Nov 20). If one can't be finished, we should lower its priority honestly rather than claim it.*
 
 **Table 5. Functional requirements**
 
 | ID | Requirement | User role | Priority | Acceptance criterion | *Now* |
 |---|---|---|---|---|---|
-| FR-01 | The system shall let a resident create an account with their name, mobile number, password, Purok (1 to 23) and number of household members, which also creates their household record. | Resident | Must | A valid form returns the new account and signs the resident in. A mobile number that is already registered is rejected with a message. | *Done, but only Purok 1–8 is accepted. Must be changed to 1–23 (tests N14–N16).* |
+| FR-01 | The system shall let a resident create an account with their name, mobile number, password, Purok (1 to 23) and number of household members, which also creates their household record. | Resident | Must | A valid form returns the new account and signs the resident in. A mobile number that is already registered is rejected with a message. | *Done. Purok 1–23 since Nov 21 (tests P01–P03).* |
 | FR-02 | The system shall let residents sign in with their mobile number and staff sign in with their email, each with a password. | Resident, Staff | Must | Correct details open the right portal. A wrong password shows "The mobile number/email or password is incorrect." | *Done* |
 | FR-03 | The system shall allow only barangay staff and administrators to use staff functions. | Staff, Admin | Must | A resident's request to any staff function is refused (HTTP 403), and the staff pages do not open for residents. | *Done* |
 | FR-04 | The system shall let a signed-in user sign out. | All | Must | After signing out, the user is returned to the sign-in page and their login token no longer works. | *Half done: the browser forgets the token, but the server still accepts it (see NFR-03)* |
@@ -69,7 +69,7 @@ Priorities use MoSCoW: **Must** (the system fails without it), **Should** (impor
 | NFR-10 | Usability | Text shall be at least 12 px, and every form field shall have a label. Errors are shown under the field they belong to. | Page check. | *Done on the pages checked so far* |
 | NFR-11 | Usability | The system shall reach a System Usability Scale (SUS) score of at least 68 (the commonly used average) with residents and barangay staff. | SUS questionnaire after the users try the system. | *Target. Part of the evaluation plan (3.9).* |
 | NFR-12 | Performance | Lists and the dashboard shall load within 3 seconds on the deployed server over a mobile data connection. | Timed page loads on the deployed link. | *Target. Can only be measured after hosting.* |
-| NFR-13 | Availability | The system shall be online at a public link from November 20, 2026. | The link opens from a phone on mobile data. | *Hosting not decided yet* |
+| NFR-13 | Availability | The system shall be online at a public link from November 26, 2026. | The link opens from a phone on mobile data. | *Hosting not decided yet* |
 | NFR-14 | Usability | Every page shall have a clear way back to the Home page (residents) or the Dashboard (staff). | Each page except Home/Dashboard shows a "Back to…" link that opens it. | *Done (tests B03–B10). Added because the barangay found it confusing where to go back.* |
 
 ---

@@ -4,14 +4,15 @@
 
 Group 4 college mini-thesis (ITE 18).
 
-## Current status (2026-11-16)
+## Current status (2026-11-21)
 
 | Part | Status |
 |---|---|
 | Frontend (Vue) | Resident sign in + register, staff sign in, the resident portal (5 pages) and the staff dashboard (5 pages). **All pages are connected to the API**, including the advisory on the sign-in page. Every page has a Back to Home / Back to Dashboard link. |
 | Backend (Laravel 13 + MySQL) | By Jhon Lee in `backend/`: Sanctum login tokens, migrations, demo data, API routes, household members, evacuation check-in/out. |
 | SMS | **TextBee** gateway (Jhon Lee, Nov 16): an Android phone with a SIM sends the alerts. Needs a TextBee API key in `backend/.env`; without it, alerts are saved but not texted. |
-| Known gap | The system accepts Purok 1–8, but Ampayon has **23 Puroks** (barangay secretary). To be fixed. |
+| Puroks | Purok **1 to 23** (Ampayon has 23 Puroks, barangay secretary). Fixed on Nov 21; the demo data only uses Purok 1–8. |
+| Deadline | Paper + online system link: **Nov 26, 2026** (extended). Hosting not decided yet. |
 
 ## How to run the backend (Laravel, first time)
 

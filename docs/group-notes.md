@@ -13,12 +13,13 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Marc Joven | Not set for the system yet. Busy until after his CSC presentation, then joins. | Chapter 1 | Chat |
 | John Humphrey | Not set for the system yet | Chapter 2 | Chat |
 
-## Deadlines (from the paper template)
+## Deadlines
+
+**Extended by the instructor (announced 2026-11-20):** the paper and the system are both due **November 26, 2026**. The old dates were Nov 19 (paper) and Nov 20 (system).
 
 | What | Deadline |
 |---|---|
-| Paper soft copy | **November 19, 2026** |
-| Link of the working system | **November 20, 2026, 11:59 PM** (the submission link closes after that) |
+| Paper soft copy + link of the working system | **November 26, 2026**. Paste both links in the instructor's Excel sheet and make sure they open for anyone. The sheet closes on **November 27**. |
 | Presentation + individual debugging | **Nov 23 to Dec 15, 2026** (instructor). Our slot is most likely **Dec 7**, the date Jhon Lee entered in the scheduling sheet. |
 
 ## Shared links
@@ -69,12 +70,15 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Mon 2026-11-16 | **SMS gateway: TextBee** | Jhon Lee pushed the SMS gateway (commit c8cac94). TextBee texts residents through an Android phone with a SIM. To use it: make a TextBee account, generate an API key, paste it in `backend/.env` as `TEXTBEE_API_KEY=`. The same push connected all staff pages and added household members. |
 | Nov 2026 | **Barangay follow-up answers** | Jhon Lee's follow-up questions, answered in chat: **23 Puroks** in Ampayon; about **500+ households** (from the barangay secretary); counting affected families by hand takes **1–2 days**; the official interviewed is the **Barangay Secretary**; evacuation capacity: "1.3k+ individuals, 500+ households" (total, not per center). Jhon Lee also asked the barangay to validate the Figma prototype. |
 | Nov 2026 | **Barangay feedback on the prototype** | Marc: they mentioned going **back**, something like a **home button**; they asked what the **notification on the admin account** is for. Humphrey: something about **inputting households**. Details still being collected. |
+| Wed 2026-11-18 | Purok in the code | Jhon Lee asked what "Purok 1–8" meant. Jhann: the code on GitHub still only accepts Purok 1–8, so Purok 23 is refused, while the paper says 1–23 works. |
+| Fri 2026-11-20 | **Jhon Lee busy** | Jhon Lee asked the rest of the group to take care of the paper: his own thesis defense is next week. Keep him updated. |
+| Fri 2026-11-20 | **Deadline extended** | The instructor moved the paper and system deadline to **Nov 26** (defenses are in December). Both links go in the same Excel sheet, which closes Nov 27. |
 
 ## Still unclear
 
 - **Frontend framework:** a framework is required (instructor, Oct 22). Vue is the likely choice, but the group should confirm it. The login page has to move from plain HTML/CSS/JS to it.
 - The diagram labels the dashboard "HTML / CSS / JavaScript". It should say Vue, since a framework is required.
-- **Hosting:** the system must be online by Nov 20, so the backend and database need a host. Not discussed yet.
+- **Hosting:** the system must be online by Nov 26, so the backend and database need a host. Not discussed yet.
 - **Name spelling:** the correct spelling is "Jhann Clevill" (confirmed 2026-10-20). The paper's title page still says "Jhan" and needs fixing.
 - System roles for Marc Joven and John Humphrey (integration, testing, SMS research, barangay data).
 - What's in the BACKEND Drive folder.
