@@ -1,5 +1,36 @@
 # Test cases and results
 
+## Purok 1–23 (Ampayon has 23 Puroks)
+
+**Tested:** 2026-11-21, on the desktop, with the backend and the Vue dev server running (demo data). **No TextBee key** in `.env`, so no real SMS was sent.
+**Changed:** the API now accepts Purok 1 to 23 in register, add/edit household, add evacuation center and SMS alerts (it was 1 to 8). Every Purok list in the frontend now comes from one place, `frontend/src/utils/options.js`.
+**How:** API calls with PowerShell (`Invoke-WebRequest`), then an automated browser test (Playwright with Microsoft Edge, headless) at 1440px and 375px wide, then `npm run build`. The test records (one resident, two households, one center, one alert) were deleted afterwards, and the demo resident's Purok was put back to 3.
+**Not changed:** the demo data still only has households and centers in Purok 1–8 (it is sample data).
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| P01 | Register a resident in Purok 23 | 201, saved with Purok 23 | Pass |
+| P02 | Register in Purok 24 | 422 "must be between 1 and 23" | Pass |
+| P03 | Register in Purok 0 | 422 | Pass |
+| P04 | Staff adds a household in Purok 23 | 201 | Pass |
+| P05 | Staff adds a household in Purok 24 | 422 | Pass |
+| P06 | Resident changes their own Purok to 23 | 200 | Pass |
+| P07 | Resident changes their own Purok to 24 | 422 | Pass |
+| P08 | Staff adds a center serving Puroks 22 and 23 | 201, serves 22 and 23 | Pass |
+| P09 | Staff adds a center serving Purok 24 | 422 | Pass |
+| P10 | Staff sends an alert to Purok 23 | 201, 1 recipient (the P01 resident), `sent` 0 because there is no TextBee key | Pass |
+| P11 | Staff sends an alert to Purok 24 | 422 "Invalid Purok." | Pass |
+| P12 | The Purok 23 resident looks at the centers | The P08 center serves their Purok | Pass |
+| P13 | Create account form: Purok list | Purok 1 to Purok 23 | Pass (both widths) |
+| P14 | My Household → Update profile: Purok list | Purok 1 to Purok 23 | Pass (both widths) |
+| P15 | Staff Households: Purok filter and Add household list | Purok 1 to Purok 23 | Pass (both widths) |
+| P16 | Staff Evacuation Centers → Add center | 23 Purok checkboxes, no sideways scrolling | Pass (both widths; 10 per row on desktop, 3 per row on a phone) |
+| P17 | Staff SMS Alerts: Send to list | "Residents of Purok 1" to "Residents of Purok 23" | Pass (both widths) |
+| P18 | All the pages above | No errors in the browser | Pass |
+| P19 | `npm run build` | No errors | Pass |
+
+Tests N14–N16 below (Purok 23 refused) now pass: see P04, P01 and P10.
+
 ## "Back to Home / Dashboard" links + real advisory on the sign-in page
 
 **Tested:** 2026-11-16, on the desktop, with the backend and the Vue dev server running (demo data).
@@ -53,7 +84,7 @@ Also removed: the old note under the sign-in form ("Demo: sign-in isn't connecte
 | N16 | Staff sends an alert to Purok 23 | Accepted | **Fail:** 422 "Invalid Purok." |
 | N17 | `npm run build` | No errors | Pass |
 
-N14–N16 fail because the system was built for Purok 1–8 (from the Figma prototype). The barangay says Ampayon has 23 Puroks.
+N14–N16 fail because the system was built for Purok 1–8 (from the Figma prototype). The barangay says Ampayon has 23 Puroks. **Fixed on 2026-11-21:** see "Purok 1–23" at the top (P01, P04, P10).
 
 ---
 

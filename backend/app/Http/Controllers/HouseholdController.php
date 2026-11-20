@@ -27,7 +27,7 @@ class HouseholdController extends Controller
 
         $data = $request->validate([
             'head_name' => 'required|string|max:255',
-            'purok'     => 'required|integer|between:1,8',
+            'purok'     => 'required|integer|between:1,23',
             'members'   => 'required|integer|min:1|max:50',
             'safety'    => 'nullable|in:safe,evacuated,needs_help',
         ]);
@@ -47,7 +47,7 @@ class HouseholdController extends Controller
 
         $data = $request->validate([
             'head_name' => 'sometimes|required|string|max:255',
-            'purok'     => 'sometimes|required|integer|between:1,8',
+            'purok'     => 'sometimes|required|integer|between:1,23',
             'members'   => 'sometimes|required|integer|min:1|max:50',
             'safety'    => 'sometimes|required|in:safe,evacuated,needs_help',
         ]);

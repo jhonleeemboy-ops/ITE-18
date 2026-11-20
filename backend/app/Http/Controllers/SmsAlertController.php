@@ -19,14 +19,14 @@ class SmsAlertController extends Controller
         $data = $request->validate([
             'title'    => 'required|string|max:255',
             'message'  => 'required|string|max:1000',
-            'send_to'  => 'required',            // "all" or a Purok number 1-8
+            'send_to'  => 'required',            // "all" or a Purok number 1-23
             'severity' => 'nullable|in:yellow,orange,red,info',
         ]);
 
         $purok = null;
         if ($data['send_to'] !== 'all') {
             $purok = (int) $data['send_to'];
-            abort_unless($purok >= 1 && $purok <= 8, 422, 'Invalid Purok.');
+            abort_unless($purok >= 1 && $purok <= 23, 422, 'Invalid Purok.');
         }
 
         // mobile numbers of the residents (in that Purok, if one was chosen)

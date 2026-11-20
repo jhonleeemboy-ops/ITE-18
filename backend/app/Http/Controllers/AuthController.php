@@ -16,7 +16,7 @@ class AuthController extends Controller
             'name'          => 'required|string|max:255',
             'mobile_number' => 'required|string',
             'password'      => 'required|string|min:8',
-            'purok'         => 'required|integer|between:1,8',
+            'purok'         => 'required|integer|between:1,23',
             'members'       => 'nullable|integer|min:1|max:50',
         ]);
 

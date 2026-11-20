@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('households', function (Blueprint $table) {
            $table->id();
            $table->string('head_name');
-           $table->unsignedTinyInteger('purok');           // 1-8
+           $table->unsignedTinyInteger('purok');           // 1-23
            $table->unsignedSmallInteger('members')->default(1);
            $table->enum('safety', ['safe', 'evacuated', 'needs_help'])->default('safe');
            $table->timestamps();

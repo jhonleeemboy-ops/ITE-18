@@ -25,7 +25,7 @@ class EvacuationCenterController extends Controller
             'name'     => 'required|string|max:255|unique:evacuation_centers,name',
             'capacity' => 'required|integer|min:1|max:100000',
             'puroks'   => 'nullable|array',
-            'puroks.*' => 'integer|between:1,8|distinct',
+            'puroks.*' => 'integer|between:1,23|distinct',
         ]);
 
         $center = DB::transaction(function () use ($data) {

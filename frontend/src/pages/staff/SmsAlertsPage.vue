@@ -13,9 +13,9 @@ import { computed, onMounted, reactive, ref } from "vue";
 import api from "../../api";
 import { formatDateTime } from "../../utils/format.js";
 import { mapSmsLog, purokNumber } from "../../utils/mappers.js";
+import { puroks } from "../../utils/options.js";
 import { focusFirstError } from "../../utils/validation.js";
 
-const puroks = ["Purok 1", "Purok 2", "Purok 3", "Purok 4", "Purok 5", "Purok 6", "Purok 7", "Purok 8"];
 const severityLabels = {
   info: "Information",
   yellow: "Yellow (be alert)",

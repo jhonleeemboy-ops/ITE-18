@@ -119,7 +119,7 @@ async function submitRegister() {
       name: register.name.trim(),
       mobile_number: register.mobile,
       password: register.password,
-      // the API wants a number 1-8, so "Purok 3" becomes 3
+      // the API wants a number 1-23, so "Purok 3" becomes 3
       purok: Number(String(register.purok).replace(/\D/g, "")),
       members, // number of people in the household, including you
     });

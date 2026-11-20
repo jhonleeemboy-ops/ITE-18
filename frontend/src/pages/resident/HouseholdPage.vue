@@ -12,6 +12,7 @@ import StatusBadge from "../../components/StatusBadge.vue";
 import api from "../../api";
 import { showToast } from "../../composables/toast.js";
 import { formatMobile, mapHousehold, purokNumber, toApiValue } from "../../utils/mappers.js";
+import { puroks } from "../../utils/options.js";
 import { focusFirstError } from "../../utils/validation.js";
 
 const user = ref(null);
@@ -21,7 +22,6 @@ const error = ref("");
 const saving = ref(false);
 
 const safetyOptions = ["safe", "evacuated", "needs help"];
-const puroks = ["Purok 1", "Purok 2", "Purok 3", "Purok 4", "Purok 5", "Purok 6", "Purok 7", "Purok 8"];
 
 // ----- Update profile form -----
 const editing = ref(false);
