@@ -1,5 +1,106 @@
 # Test cases and results
 
+## Final system test (for Chapter 4)
+
+**Tested:** 2026-11-24, on the desktop (AMD Ryzen 3 2200G, 14 GB RAM, Windows 10 Pro; Laragon 8.8 with PHP 8.3.36 and MySQL 8.4.3). The database was reset to the demo data first (`php artisan migrate:fresh --seed`) and again afterwards, so no test records are left. **No TextBee key** in `.env`, so no real SMS was sent (real SMS: S01–S02 on Nov 15, in the paper's Table 13).
+**How:** 51 API test cases with PowerShell (`Invoke-WebRequest`) against the endpoints the pages use, with database checks through the MySQL client; then 12 browser checks with Playwright in Microsoft Edge (headless) at 320, 375, 768 and 1440 px, signing in through the real forms; then `npm run build`.
+**Result:** 61 of 63 passed in the first run. G02 (text smaller than 12 px) was fixed in the CSS and passes now. G11 (load time) fails on the development server and passes with PHP OPcache on, which the hosting server must have.
+
+### API (F01–F51)
+
+| ID | Req. | Test | Result | Details |
+|---|---|---|---|---|
+| F01 | FR-02 | Resident signs in with mobile number | Pass | status 200, token returned |
+| F02 | FR-02 | Staff signs in with email | Pass | status 200, role staff |
+| F03 | FR-02 | Wrong password is refused | Pass | status 422: The mobile number/email or password is incorrect. |
+| F04 | FR-01 | Register a resident (Purok 12, 3 members) | Pass | status 201, household created, no password in the answer |
+| F05 | FR-01 | Register the same mobile number again | Pass | status 422: This mobile number is already registered. |
+| F06 | FR-01, NFR-05 | Register with an empty form | Pass | status 422, errors for: name, mobile_number, password, purok |
+| F07 | FR-01 | Register in Purok 24 (Ampayon has 23) | Pass | status 422 |
+| F08 | NFR-02 | Every protected endpoint without a login token | Pass | 24 of 24 refused with 401 |
+| F09 | FR-03, NFR-03 | Every staff-only endpoint with a resident's token | Pass | 13 of 13 refused with 403 |
+| F10 | NFR-03 | A resident reads or changes another household | Pass | 5 of 5 refused with 403 |
+| F11 | FR-15, NFR-03 | A resident's request list shows only their own requests | Pass | 2 listed, 0 belong to someone else |
+| F12 | FR-05 | Search households by head name ('Juan') | Pass | 25 found, 0 not matching |
+| F13 | FR-05 | Filter households by Purok 3 | Pass | 4 shown, database has 4 |
+| F14 | FR-24 | Staff adds a household listed by personnel | Pass | status 201, households 26 -> 27 |
+| F15 | NFR-05 | Staff adds a household with invalid input | Pass | status 422, nothing saved (27 households) |
+| F16 | FR-25 | Resident corrects own household (members 5) | Pass | status 200, members now 5 |
+| F17 | FR-07 | Resident marks household as evacuated; staff list shows it | Pass | status 200, staff list shows 'evacuated' |
+| F18 | FR-08 | Resident adds 3 members (age 67, age 1, PWD) and lists them | Pass | statuses 201/201/201, 3 listed |
+| F19 | FR-08, NFR-05 | Add a member with no name and age 130 | Pass | status 422, errors for: name, age |
+| F20 | FR-08 | Resident removes a member | Pass | status 204, 2 left |
+| F21 | FR-22 | Every dashboard number equals a direct database count | Pass | 21 of 21 figures match |
+| F22 | FR-22 | Dashboard updates right after a household is added | Pass | total 27 -> 28, no manual count |
+| F23 | FR-26 | Staff adds a center (capacity 100, Puroks 1 and 23) | Pass | status 201, center status 'standby' |
+| F24 | FR-26 | Add a center with a name already used | Pass | status 422 |
+| F25 | FR-09 | Residents see the new center with its Puroks | Pass | serves Purok 1 and 23 |
+| F26 | FR-10 | Check in 50 people | Pass | occupants 50, status 'open' |
+| F27 | FR-10 | Check in 40 more (90 of 100) | Pass | occupants 90, status 'near_capacity' |
+| F28 | FR-10, NFR-06 | Check in 11 when only 10 places are left | Pass | status 422: Only 10 places left in this center.; occupants still 90 |
+| F29 | FR-10 | Fill the center exactly (100 of 100) | Pass | occupants 100 |
+| F30 | FR-10, NFR-06 | Check out 101 when 100 are inside | Pass | status 422: Only 100 people are in this center. |
+| F31 | FR-10 | Check everyone out | Pass | occupants 0, status 'standby' |
+| F32 | FR-10, NFR-06 | 60 random check-ins/outs (1-60 people each) | Pass | 32 accepted, 28 refused, 0 times the count was wrong or outside 0-100 |
+| F33 | FR-11 | Staff views relief items and stock | Pass | 4 items; Rice: 500 kg |
+| F34 | FR-12 | Release 25 kg of rice to a household | Pass | status 201, stock 500 -> 475 |
+| F35 | FR-13 | The release is first in the distribution history | Pass | top entry: 25 kg Rice to 'Juan Dela Cruz' |
+| F36 | FR-12, NFR-06 | Release 1 kg more than the stock | Pass | status 422: Only 475 kg left in stock.; stock still 475 |
+| F37 | NFR-05 | Release 0 kg, and release to a household that does not exist | Pass | statuses 422 and 422 |
+| F38 | FR-12, NFR-06 | Release the whole stock, then 1 kg more | Pass | stock 0 after the release; next release refused (422): Only 0 kg left in stock. |
+| F39 | FR-14 | Resident sends a medical request | Pass | priority 'high', status 'pending' |
+| F40 | FR-14 | Resident sends a relief request | Pass | priority 'medium' |
+| F41 | NFR-05 | Request with a type that does not exist | Pass | status 422 |
+| F42 | FR-16, FR-15 | Staff sets the request to in progress and adds a note; the resident sees it | Pass | resident sees 'in_progress' with 1 note |
+| F43 | FR-18, NFR-07 | Staff sends an alert to all residents (no TextBee key on this computer) | Pass | status 201; recipients 2, sent 0; the answer does not claim an SMS was sent |
+| F44 | FR-17, FR-28 | The alert is first on the resident's alerts and on the sign-in page | Pass | residents: 'FINAL TEST alert'; sign-in page: 'FINAL TEST alert' |
+| F45 | FR-18 | Alert to Purok 20 (no registered residents there) | Pass | recipients 0 |
+| F46 | FR-20 | The SMS log lists both alerts with their counts | Pass | 3 entries in the log |
+| F47 | NFR-05 | Alert with an empty title and message | Pass | status 422 |
+| F48 | FR-27 | Staff deletes an alert; residents no longer see it | Pass | status 204 |
+| F49 | FR-21 | Residents see the emergency hotlines | Pass | 5 shown, database has 5 (sample numbers) |
+| F50 | NFR-01 | Every password in the users table is a bcrypt hash | Pass | 4 of 4 accounts |
+| F51 | NFR-04 | No .env file or SMS key in the GitHub repository | Pass | 0 .env files, 0 keys found |
+
+### Browser (G01–G12)
+
+| ID | Req. | Test | Result | Details |
+|---|---|---|---|---|
+| G01 | NFR-08 | All 13 pages at 320, 375, 768 and 1440 px: no sideways scrolling | Pass | 52 of 52 page views |
+| G02 | NFR-09 | Smallest text on any page is at least 12 px | **Fail**, then Pass after the fix | First run: labels such as "Barangay Ampayon" under the logo, "Main menu", the eyebrow and chip labels were 10–11 px. Raised to 12 px; re-run: smallest text 12 px, and G01 still passes |
+| G03 | NFR-09 | Every form field has a label (forms opened) | Pass | 240 field views checked, 0 without a label |
+| G04 | FR-28 | Sign-in page shows the newest alert without signing in | Pass | shows "FINAL TEST alert" |
+| G05 | NFR-09 | Empty Create account form: each error appears under its own field | Pass | 5 of 5 fields show their own message below them |
+| G06 | NFR-02 | Signed-out visitor opens the resident portal | Pass | sent to #/ |
+| G07 | FR-03 | Resident opens the staff dashboard address | Pass | sent to #/resident/home |
+| G08 | FR-08 | My Household labels members aged 60+ as Senior, under 2 as Infant, and PWD | Pass | Senior true, Infant true, PWD true |
+| G09 | FR-04 | Resident signs out | Pass | back on #/, token removed |
+| G10 | NFR-10 | Back to Home / Back to Dashboard on every inner page opens the right page | Pass | 8 of 8 pages |
+| G11 | NFR-12 | Lists and the dashboard load within 3 seconds | **Fail** on the development server, Pass with OPcache | Measured separately (5 full reloads per page, until the last API answer): resident Home 4.44 s average on `php artisan serve` without OPcache; 0.36 s with OPcache. See the table below |
+| G12 | — | No errors in the browser console during all checks | Pass | none |
+
+### Load time (NFR-12)
+
+Time from opening the page (full reload) until the last API answer arrived; 5 loads per page at 1440 px; average and slowest, in seconds. Browser and server on the same computer, so the network delay of a real server is not included.
+
+| Page | `php artisan serve` (no OPcache) | PHP built-in server with OPcache |
+|---|---|---|
+| Staff: Dashboard | 2.35 (2.86) | 0.32 (0.34) |
+| Staff: Household Profiles | 0.63 (0.65) | 0.18 (0.26) |
+| Staff: Evacuation Centers | 0.63 (0.64) | 0.16 (0.18) |
+| Staff: Relief Distribution | 1.69 (1.70) | 0.26 (0.28) |
+| Staff: SMS Alerts | 0.64 (0.65) | 0.16 (0.18) |
+| Resident: Home | 4.44 (6.38) | 0.36 (0.39) |
+| Resident: My Household | 1.25 (1.32) | 0.20 (0.22) |
+| Resident: Evacuation | 1.13 (1.14) | 0.20 (0.22) |
+| Resident: Alerts | 0.61 (0.63) | 0.16 (0.18) |
+
+**Why it was slow:** `php artisan serve` answers one request at a time and Laragon's PHP has OPcache off, so each request takes about 0.5 s, and the resident Home asks for 5 things at once. With OPcache on (`php -d zend_extension=opcache -d opcache.enable=1 -d opcache.enable_cli=1 -S 127.0.0.1:8000 …/server.php` from `backend/public`), each request takes about 0.02 s.
+
+**500 households** (generated rows across all 23 Puroks, deleted afterwards): `GET /households` took 0.39–0.42 s and `GET /dashboard` about 0.30 s on `php artisan serve`; the dashboard totals (500 households, 2,032 people, safety counts) matched the database; the Household Profiles page loaded in 0.75 s.
+
+---
+
 ## Purok 1–23 (Ampayon has 23 Puroks)
 
 **Tested:** 2026-11-21, on the desktop, with the backend and the Vue dev server running (demo data). **No TextBee key** in `.env`, so no real SMS was sent.

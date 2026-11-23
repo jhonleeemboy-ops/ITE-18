@@ -154,7 +154,7 @@ svg {
 }
 
 .brand-place {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.1px;
   text-transform: uppercase;
@@ -372,7 +372,7 @@ svg {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 99px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.3px;
   text-transform: uppercase;
@@ -433,7 +433,7 @@ svg {
   border: 1px solid var(--amber-line);
   border-radius: 99px;
   background: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.4px;
   text-transform: uppercase;
@@ -472,8 +472,8 @@ svg {
   }
 
   .brand-place {
-    font-size: 10px;
-    letter-spacing: 0.5px;
+    font-size: 12px;
+    letter-spacing: 0.3px;
   }
 
   /* Not enough room on phones: show only "Barangay Ampayon" */
