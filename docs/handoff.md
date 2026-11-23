@@ -62,7 +62,10 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Current status (update at the end of each session)
 
-*Last updated: 2026-11-21, desktop (Claude).*
+*Last updated: 2026-11-24, desktop (Claude).*
+
+- **Final system test (Nov 24):** 51 API tests (F01–F51) + 12 browser checks (G01–G12), all pass after one fix (labels raised from 10–11 px to 12 px). Pages are slow on `php artisan serve` (resident Home 4.4 s) because Laragon's PHP has **OPcache off**; with OPcache on, every page loads in under 0.4 s. **The hosting server must have OPcache on.** Details: [test-cases.md](test-cases.md).
+- **Chapter 4 draft:** [chapter4-draft.md](chapter4-draft.md) (Tables 15–21, Figures 6–12). Screenshots retaken Nov 24, in the "Disaster Ready screenshots" folder on Jhann's desktop.
 
 - **Every page is connected to the API** (Jhon Lee, commit c8cac94, Nov 16). New: SMS through **TextBee**, household members (name, age, relationship, PWD), residents can edit their household, staff can add households, staff can add centers and check people in/out, staff can delete an alert. API tests N01–N16 pass; see [test-cases.md](test-cases.md).
 - **Purok 1–23 works** (Nov 21; Ampayon has 23 Puroks, barangay secretary). The API checks are in `AuthController`, `HouseholdController` (2), `EvacuationCenterController` and `SmsAlertController`; every Purok list in the frontend comes from `options.js`. The demo data still only uses Purok 1–8. Tests P01–P19.
@@ -76,11 +79,11 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Next tasks (in order)
 
-1. Group: decide **hosting** (link due Nov 26), assign **Ch 4–5**.
-2. Fill the blanks in the Google Doc's Ch 3 (sprint dates, Figures 2–5, licences, consent, "not deployed" sentence, name spelling "Jhann").
-3. Barangay feedback on household input: details still unclear. (Back/home: done. The admin notification was only in the Figma prototype.)
-4. Staff page for assistance requests; sign out on the server.
-5. Finish Chapter 3 (paper due Nov 26); check that its tables still match the code.
+1. Group: decide **hosting** (link due Nov 26; the host needs PHP 8.3 with OPcache, MySQL, and a way to run `php artisan migrate --seed`).
+2. Put Chapter 4 in the Google Doc (see "Notes for the group" at the end of [chapter4-draft.md](chapter4-draft.md)), then write Chapter 5 from 4.5 and 4.6.
+3. Fill the blanks in the Google Doc's Ch 3 (sprint dates, Figures 2–5, licences, consent, "not deployed" sentence, name spelling "Jhann").
+4. Barangay feedback on household input: details still unclear. (Back/home: done. The admin notification was only in the Figma prototype.)
+5. Staff page for assistance requests; sign out on the server.
 6. Ask Jhon Lee if the unused `frontend/src/services/` folder can be deleted; remove the duplicate `PUT /households/{household}` line in `routes/api.php`.
 
 ## Rules for AI assistants
@@ -102,6 +105,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 | Date | Computer / AI | What was done |
 |---|---|---|
+| 2026-11-24 | Desktop / Claude | Final system test on a freshly seeded database (F01–F51, G01–G12, load times, 500-household check); fixed text under 12 px; retook the screenshots; wrote the Chapter 4 draft |
 | 2026-11-21 | Desktop / Claude | Purok 1–8 → 1–23 in the API (5 checks) and the frontend (all lists from `options.js`); 12 API tests + 7 browser checks at 2 widths + build (P01–P19) |
 | 2026-11-20 | Desktop / Claude | Recorded the deadline extension (paper + system due Nov 26) and that Jhon Lee is busy until his defense; reviewed the Google Doc against the code (Purok 1–23 claim still not true in the code) |
 | 2026-11-16 | Desktop / Claude | Back to Home/Dashboard links on every page + real advisory on the sign-in page; 14 browser checks (B01–B14) |

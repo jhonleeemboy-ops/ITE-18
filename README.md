@@ -4,7 +4,7 @@
 
 Group 4 college mini-thesis (ITE 18).
 
-## Current status (2026-11-21)
+## Current status (2026-11-24)
 
 | Part | Status |
 |---|---|
@@ -12,6 +12,8 @@ Group 4 college mini-thesis (ITE 18).
 | Backend (Laravel 13 + MySQL) | By Jhon Lee in `backend/`: Sanctum login tokens, migrations, demo data, API routes, household members, evacuation check-in/out. |
 | SMS | **TextBee** gateway (Jhon Lee, Nov 16): an Android phone with a SIM sends the alerts. Needs a TextBee API key in `backend/.env`; without it, alerts are saved but not texted. |
 | Puroks | Purok **1 to 23** (Ampayon has 23 Puroks, barangay secretary). Fixed on Nov 21; the demo data only uses Purok 1–8. |
+| Final test | Nov 24: 51 API tests + 12 browser checks, all pass after one fix (see [docs/test-cases.md](docs/test-cases.md)). Pages are slow on `php artisan serve` (up to 4.4 s); with PHP OPcache on, under 0.4 s. The host must have OPcache on. |
+| Paper | Chapter 4 draft: [docs/chapter4-draft.md](docs/chapter4-draft.md). |
 | Deadline | Paper + online system link: **Nov 26, 2026** (extended). Hosting not decided yet. |
 
 ## How to run the backend (Laravel, first time)
@@ -92,6 +94,7 @@ ITE-18
     ├── group-notes.md             Members, roles, deadlines and what the group agreed in chat
     ├── thesis-requirements.md     Paper template + grading rubric summary + Chapter 3 checklist
     ├── chapter3-draft.md          Chapter 3 draft: requirements, API endpoints, technologies
+    ├── chapter4-draft.md          Chapter 4 draft: results, traceability, test results, discussion
     ├── erd-review.md              Review of ERD v1 with suggestions
     ├── ai-use-log.md              Record of AI/tools used, for the paper's Declaration page
     ├── prototype-notes.md         What each Figma screen contains, design colors and fonts
