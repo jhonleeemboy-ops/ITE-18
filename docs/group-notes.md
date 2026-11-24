@@ -72,6 +72,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Nov 2026 | **Barangay feedback on the prototype** | Marc: they mentioned going **back**, something like a **home button**; they asked what the **notification on the admin account** is for. Humphrey: something about **inputting households**. Details still being collected. |
 | Wed 2026-11-18 | Purok in the code | Jhon Lee asked what "Purok 1–8" meant. Jhann: the code on GitHub still only accepts Purok 1–8, so Purok 23 is refused, while the paper says 1–23 works. |
 | Fri 2026-11-20 | **Jhon Lee busy** | Jhon Lee asked the rest of the group to take care of the paper: his own thesis defense is next week. Keep him updated. |
+| Mon 2026-11-24 | **Paper: Chapters 1–3 only** | Jhon Lee: Chapters 4 and 5 are not included ("1-3 ra ta"); the instructor said so in the discussion video. |
 | Fri 2026-11-20 | **Deadline extended** | The instructor moved the paper and system deadline to **Nov 26** (defenses are in December). Both links go in the same Excel sheet, which closes Nov 27. |
 
 ## Still unclear

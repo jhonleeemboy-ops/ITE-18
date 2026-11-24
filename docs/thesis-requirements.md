@@ -23,9 +23,9 @@ Instructor's materials (Oct 8 post): "ITE18 Finals Requirements" video (18 min),
 
 **The biggest single part (35%) is individual backend debugging.** Every member needs to understand the backend, not just Jhon Lee. Grades are adjusted per person using the GitHub history and Appendix I.
 
-## Our copy of the paper is missing two chapters
+## Chapters 4 and 5: not part of this submission
 
-The instructor's template has **Chapter 4 (Results and Discussion)** and **Chapter 5 (Summary, Conclusions and Recommendations)**. The group's Google Doc copy stops after Chapter 3, so these need to be added and assigned.
+The template has **Chapter 4 (Results and Discussion)** and **Chapter 5 (Summary, Conclusions and Recommendations)**, but the instructor said in the discussion video that **only Chapters 1–3** are submitted (Jhon Lee, Nov 24). The test results still belong in **Appendix F** (full test cases, results and bug log). For reference, what the template asks for in those chapters:
 
 - Ch 4: 4.1 the developed system (screenshots per module, requirement IDs, deployed link, demo accounts), 4.2 traceability table (requirement → module/endpoint → test case → status), 4.3 testing results (pass/fail counts, defects and fixes), 4.4 user evaluation results (mean, SD, interpretation), 4.5 discussion per objective, 4.6 limitations
 - Ch 5: 5.1 summary of findings, 5.2 one conclusion per objective, 5.3 recommendations

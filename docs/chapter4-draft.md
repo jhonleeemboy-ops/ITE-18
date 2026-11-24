@@ -1,5 +1,7 @@
 # Chapter 4 draft: Results and Discussion
 
+**Not part of the paper.** The instructor said only Chapters 1–3 are submitted (discussion video, via Jhon Lee, Nov 24). This draft is kept because its test results and bug log (Tables 17–19) can go in Appendix F, and it helps prepare for the defense.
+
 *Draft for the paper, written from the final test run on November 24, 2026 and the earlier test records in [test-cases.md](test-cases.md). Table and figure numbers continue from Chapter 3 (last table: Table 14; last figure: Figure 5). Text in [square brackets] must be filled in by the group. The "Notes for the group" at the end are not part of the paper.*
 
 ---

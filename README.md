@@ -13,7 +13,7 @@ Group 4 college mini-thesis (ITE 18).
 | SMS | **TextBee** gateway (Jhon Lee, Nov 16): an Android phone with a SIM sends the alerts. Needs a TextBee API key in `backend/.env`; without it, alerts are saved but not texted. |
 | Puroks | Purok **1 to 23** (Ampayon has 23 Puroks, barangay secretary). Fixed on Nov 21; the demo data only uses Purok 1–8. |
 | Final test | Nov 24: 51 API tests + 12 browser checks, all pass after one fix (see [docs/test-cases.md](docs/test-cases.md)). Pages are slow on `php artisan serve` (up to 4.4 s); with PHP OPcache on, under 0.4 s. The host must have OPcache on. |
-| Paper | Chapter 4 draft: [docs/chapter4-draft.md](docs/chapter4-draft.md). |
+| Paper | Chapters 1–3 only (instructor). Test results for Appendix F: [docs/test-cases.md](docs/test-cases.md) and [docs/chapter4-draft.md](docs/chapter4-draft.md). |
 | Deadline | Paper + online system link: **Nov 26, 2026** (extended). Hosting not decided yet. |
 
 ## How to run the backend (Laravel, first time)
