@@ -77,17 +77,17 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Mon 2026-11-24 | System chart; ready to submit? | Jhann shared a chart of the system flow; Jhon Lee liked it and agreed to put it in the paper. Jhon Lee asked if the system is ready to submit. It passed the final test, but it still has no online link (hosting not decided). |
 | Mon 2026-11-24 | Hosting idea | Jhon Lee suggested using the same free host as another group (a `freehosting.dev` subdomain) and will look at how they did it. Not checked yet whether it runs PHP 8.3+ with MySQL. |
 | Mon 2026-11-24 | **Presentation moved** | The scheduling sheet now says our slot moved from Dec 7 (3:00–4:30 PM) to **Dec 14, 2026, 4:30–6:00 PM**. Jhon Lee: the instructor had said Dec 10 in the group chat, but the sheet was updated again. |
+| Tue 2026-11-25 | **Appendix I + final check** | Jhon Lee filled in Appendix I (role, tasks, 25% share each) and asked everyone to sign it and check the whole document. Once all agree it's OK, the group submits the paper and starts the PPT. |
 
 ## Still unclear
 
 - **Frontend framework:** a framework is required (instructor, Oct 22). Vue is the likely choice, but the group should confirm it. The login page has to move from plain HTML/CSS/JS to it.
 - The diagram labels the dashboard "HTML / CSS / JavaScript". It should say Vue, since a framework is required.
-- **Hosting:** the system must be online by Nov 26, so the backend and database need a host. Not discussed yet.
+- **Hosting:** the system must be online by Nov 26, so the backend and database need a host. Jhon Lee is looking at `freehosting.dev` (Nov 24); not decided yet.
 - **Name spelling:** the correct spelling is "Jhann Clevill" (confirmed 2026-10-20). The paper's title page still says "Jhan" and needs fixing.
 - System roles for Marc Joven and John Humphrey (integration, testing, SMS research, barangay data).
 - What's in the BACKEND Drive folder.
 - **Capacity of each evacuation center** and the real list of centers. Marc confirmed (Nov 16) that "1.3k+ individuals, 500+ households" is the **total** capacity of their evacuation centers, not per center.
 - Whether "500+ households" is all of Ampayon or only the affected/listed families.
 - What the barangay said about household input. (Back/home button: Humphrey said on Nov 16 that they didn't name a screen; they just found it confusing where to go back or home. So it applies to the whole system.)
-- Who writes **Chapter 4 and Chapter 5**. They're in the instructor's template but missing from our Google Doc copy.
 - What the instructor's "Finals Requirements" video says (not reviewed here).
