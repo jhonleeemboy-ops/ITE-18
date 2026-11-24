@@ -20,7 +20,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 | What | Deadline |
 |---|---|
 | Paper soft copy + link of the working system | **November 26, 2026**. Paste both links in the instructor's Excel sheet and make sure they open for anyone. The sheet closes on **November 27**. |
-| Presentation + individual debugging | **Nov 23 to Dec 15, 2026** (instructor). Our slot is most likely **Dec 7**, the date Jhon Lee entered in the scheduling sheet. |
+| Presentation + individual debugging | **Nov 23 to Dec 15, 2026** (instructor). Our slot: **Dec 14, 2026, 4:30–6:00 PM** (moved from Dec 7, 3:00–4:30 PM; scheduling sheet, Nov 24). |
 
 ## Shared links
 
@@ -75,6 +75,8 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Fri 2026-11-20 | **Deadline extended** | The instructor moved the paper and system deadline to **Nov 26** (defenses are in December). Both links go in the same Excel sheet, which closes Nov 27. |
 | Mon 2026-11-24 | **Paper: Chapters 1–3 only** | Jhon Lee: Chapters 4 and 5 are not included ("1-3 ra ta"); the instructor said so in the discussion video. |
 | Mon 2026-11-24 | System chart; ready to submit? | Jhann shared a chart of the system flow; Jhon Lee liked it and agreed to put it in the paper. Jhon Lee asked if the system is ready to submit. It passed the final test, but it still has no online link (hosting not decided). |
+| Mon 2026-11-24 | Hosting idea | Jhon Lee suggested using the same free host as another group (a `freehosting.dev` subdomain) and will look at how they did it. Not checked yet whether it runs PHP 8.3+ with MySQL. |
+| Mon 2026-11-24 | **Presentation moved** | The scheduling sheet now says our slot moved from Dec 7 (3:00–4:30 PM) to **Dec 14, 2026, 4:30–6:00 PM**. Jhon Lee: the instructor had said Dec 10 in the group chat, but the sheet was updated again. |
 
 ## Still unclear
 

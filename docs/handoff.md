@@ -21,7 +21,7 @@ The repo is public: **first names only** here, and **no secrets** (passwords, `.
 | When | What |
 |---|---|
 | **Nov 26, 2026** | Paper soft copy **and** link of the working system (**must be online**). Paste both links in the instructor's Excel sheet and check that they open; the sheet closes Nov 27. (Extended on Nov 20; the old dates were Nov 19 and Nov 20.) |
-| Nov 23 – Dec 15 | Presentation + individual backend debugging exam (our slot likely Dec 7) |
+| Nov 23 – Dec 15 | Presentation + individual backend debugging exam. Our slot: **Dec 14, 4:30–6:00 PM** (moved from Dec 7; scheduling sheet, Nov 24) |
 
 Grading: paper 15%, system 30%, presentation 20%, **individual backend debugging 35%**. GitHub history counts per person. Details: [thesis-requirements.md](thesis-requirements.md).
 
@@ -79,7 +79,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Next tasks (in order)
 
-1. Group: decide **hosting** (link due Nov 26; the host needs PHP 8.3 with OPcache, MySQL, and a way to run `php artisan migrate --seed`).
+1. Group: decide **hosting** (link due Nov 26; the host needs PHP 8.3 with OPcache, MySQL, and a way to run `php artisan migrate --seed` or import the database). Jhon Lee is looking at `freehosting.dev`, which another group uses (Nov 24).
 2. Paper (Ch 1–3 only): remove the empty "CHAPTER 5" from the Google Doc; put the final test results and bug log in Appendix F; screenshots go in 3.5 (Figure 6 onward).
 3. Fill the blanks in the Google Doc's Ch 3 (sprint dates, Figures 2–5, licences, consent, "not deployed" sentence, name spelling "Jhann").
 4. Barangay feedback on household input: details still unclear. (Back/home: done. The admin notification was only in the Figma prototype.)
