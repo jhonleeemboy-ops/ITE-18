@@ -40,5 +40,5 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 
 EXPOSE 10000
 
-CMD php artisan migrate --force && php artisan db:seed --class=AdminUserSeeder --force && apache2-foreground
+CMD php artisan migrate --force && apache2-foreground
 
