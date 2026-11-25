@@ -82,6 +82,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Tue 2026-11-25 | **Problem 3 removed** | Jhon Lee felt Problem 3 (no running record of evacuees per facility) was not really validated and removed it with its objective. Marc: the barangay probably keeps a manual record of when a facility is full, and he and Humphrey can go back to confirm. Note: the title and the system still have the evacuation center module (FR-09, FR-10, FR-26), so it now has no matching problem or objective. |
 | Tue 2026-11-25 | **Paper submitted** | Jhon Lee submitted the paper link (7:21 PM); Marc and Humphrey can still add their signatures to Appendix I in the Google Doc. Jhon Lee asked Jhann how to submit the system and whether to do it like the other group (`freehosting.dev`). Hosting still not done; due Nov 26. |
 | Tue 2026-11-25 | **Hosting: Jhon Lee on Vercel** | Jhon Lee is hosting the system himself on Vercel: the frontend is done, the backend was still being configured (8:21 PM). Jhann's InfinityFree upload package (see [handoff.md](handoff.md)) stays as a backup. |
+| Tue 2026-11-25 | Signatures; doc access | All four signatures are in Appendix I (Marc added his through a comment, 8:48 PM). Jhon Lee then limited access to the Google Doc so other groups can't change it. Marc's Google name is "Marc Joven Gauran", but the title page and Table 4 still say "Guaran". |
 
 ## Still unclear
 
