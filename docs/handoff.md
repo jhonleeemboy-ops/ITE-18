@@ -62,7 +62,10 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Current status (update at the end of each session)
 
-*Last updated: 2026-11-24, desktop (Claude).*
+*Last updated: 2026-11-25, desktop (Claude).*
+
+- **Online (Nov 25, Jhon Lee):** backend on **Render** with Docker (`backend/Dockerfile`; it runs `php artisan migrate` only, so the online database has **no demo data**: no relief items, centers or hotlines until staff add them), frontend on **Vercel**.
+- **Add stock (Nov 25):** staff can now add a relief item or the goods received on the Relief page (`POST /relief-items`, `PATCH /relief-items/{id}/stock`). Tests K01–K24. The paper's 1.5 still says recording received stock is "left for a later version".
 
 - **Final system test (Nov 24):** 51 API tests (F01–F51) + 12 browser checks (G01–G12), all pass after one fix (labels raised from 10–11 px to 12 px). Pages are slow on `php artisan serve` (resident Home 4.4 s) because Laragon's PHP has **OPcache off**; with OPcache on, every page loads in under 0.4 s. **The hosting server must have OPcache on.** Details: [test-cases.md](test-cases.md).
 - **The paper is Chapters 1–3 only** (instructor's discussion video, via Jhon Lee, Nov 24). The [Chapter 4 draft](chapter4-draft.md) is not submitted; its test results and bug log (Tables 17–19) are for Appendix F and the defense. Screenshots retaken Nov 24, in the "Disaster Ready screenshots" folder on Jhann's desktop.
@@ -73,7 +76,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 - No staff page yet to update assistance requests (the API has `PATCH /incidents/{id}` and notes).
 - No sign-out endpoint and login tokens never expire (`config/sanctum.php`: `'expiration' => null`).
 - Barangay feedback on the prototype: wants a **back/home button**; asked what the **admin notification** is for; something about **inputting households** (details unclear).
-- Hosting for the Nov 26 online link: **not decided**.
+- Hosting for the Nov 26 online link: Render (backend) + Vercel (frontend), set up by Jhon Lee (see the first point).
 - **Jhon Lee is busy** with another thesis defense the week of Nov 23. The rest of the group handles the paper and keeps him updated (Nov 20).
 - Chapter 3 draft (system parts): [chapter3-draft.md](chapter3-draft.md).
 
@@ -105,6 +108,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 | Date | Computer / AI | What was done |
 |---|---|---|
+| 2026-11-25 | Desktop / Claude | Pulled Jhon Lee's Render/Docker commits; added "Add stock" to the staff Relief page (API + form), 12 API tests + 11 browser checks + build (K01–K24) on a separate test database; reviewed the paper, drafted the Declaration; InfinityFree upload package (backup) |
 | 2026-11-24 | Desktop / Claude | Final system test on a freshly seeded database (F01–F51, G01–G12, load times, 500-household check); fixed text under 12 px; retook the screenshots; wrote the Chapter 4 draft |
 | 2026-11-21 | Desktop / Claude | Purok 1–8 → 1–23 in the API (5 checks) and the frontend (all lists from `options.js`); 12 API tests + 7 browser checks at 2 widths + build (P01–P19) |
 | 2026-11-20 | Desktop / Claude | Recorded the deadline extension (paper + system due Nov 26) and that Jhon Lee is busy until his defense; reviewed the Google Doc against the code (Purok 1–23 claim still not true in the code) |

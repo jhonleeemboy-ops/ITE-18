@@ -101,6 +101,44 @@ Time from opening the page (full reload) until the last API answer arrived; 5 lo
 
 ---
 
+## Add stock on the Relief page (goods received)
+
+**Tested:** 2026-11-25, on the desktop, against a separate test database (`disaster_ready_relief_test`, seeded, then deleted afterwards). The normal `disaster_ready` database was not touched.
+**Why:** Jhon Lee found that the online version had no relief items and that staff had no way to add an item or the goods the barangay receives. The hosted database is not seeded (commit 549c28b), so the "Relief item" list was empty.
+**Changed:** two staff-only API addresses, `POST /relief-items` (new item with the quantity received) and `PATCH /relief-items/{id}/stock` (add received goods to an item), and an **Add stock** button and form on the staff Relief page. Only one form (Add stock or New distribution) is open at a time.
+**How:** API calls with PowerShell (`Invoke-WebRequest`), then an automated browser test (Playwright with Microsoft Edge, headless) at 1440px and 375px wide, starting with **no relief items** (like the online database), then `npm run build`.
+
+| ID | Test | Expected | Result |
+|---|---|---|---|
+| K01 | Staff adds a new item (Sleeping mat, pieces, 40) | 201, stock 40 | Pass |
+| K02 | Get the item list | The new item is in it | Pass |
+| K03 | Add an item that already exists ("rice" when "Rice" is there) | 422 "This item is already in the list. Choose it from the list to add stock." | Pass |
+| K04 | Add an item with empty name, unit and quantity | 422 on all three | Pass |
+| K05 | Add an item with quantity 0 | 422 | Pass |
+| K06 | Add 100 kg to Rice | 200, stock 500 → 600 | Pass |
+| K07 | Add −5, 2.5 or "abc" to Rice | 422 each time, stock unchanged | Pass |
+| K08 | Add stock to an item that doesn't exist | 404 | Pass |
+| K09 | A resident tries to add an item or stock | 403 both | Pass |
+| K10 | Not signed in | 401 both | Pass |
+| K11 | Release 2 of the new item, then 39 more | 201 (38 left), then 422 "Only 38 pieces left in stock." | Pass |
+| K12 | Add more than 1,000,000 at once | 422 | Pass |
+| K13 | Relief page with no items | "No relief items yet. Use “Add stock” to add one." | Pass |
+| K14 | Add stock: save with no item chosen | "Choose the relief item." | Pass |
+| K15 | New item: save with empty name, unit, quantity | A message under each field | Pass |
+| K16 | New item Rice, kg, 500 | Rice card shows 500, form closes, the "no items" message goes away | Pass |
+| K17 | New item "rice" when Rice is already there | Message under the name (K03) | Pass |
+| K18 | Choose Rice from the list, add 50 | Card shows 550; "50 kg of Rice added to the stock." | Pass |
+| K19 | New distribution: item list | "Rice (550 kg in stock)" | Pass |
+| K20 | Release 5 kg of Rice | Card shows 545; listed in Recent distributions | Pass |
+| K21 | Open Add stock, then New distribution | Only one form open at a time | Pass |
+| K22 | Phone width (375 px) with the Add stock form open | No sideways scrolling | Pass |
+| K23 | Browser console during the tests | No errors (only the expected 422 from K17) | Pass |
+| K24 | `npm run build` | No errors | Pass |
+
+**Online version:** the new code still has to be put online (Render for the backend, Vercel for the frontend). Until then the online Relief page has no Add stock button.
+
+---
+
 ## Purok 1–23 (Ampayon has 23 Puroks)
 
 **Tested:** 2026-11-21, on the desktop, with the backend and the Vue dev server running (demo data). **No TextBee key** in `.env`, so no real SMS was sent.

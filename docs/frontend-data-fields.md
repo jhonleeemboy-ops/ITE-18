@@ -13,6 +13,8 @@ Field names follow ERD v1 where it has them. Fields marked **(new)** aren't in E
 | Staff **sign in** (`#/staff-login`) | `email`, `password` | The staff sign-in method is still to be confirmed |
 | Resident **assistance request** (`#/resident/assistance`) | `type` (evacuation / relief / medical / rescue / hazard), `description` **(new)** | Saved as an INCIDENT; backend adds `reporter_id`, `status = pending`, `created_at` |
 | Staff **SMS alert** (`#/staff/sms-alerts`) | `title`, `message` **(new)**, `send_to` (all or a Purok) | Saved as an ADVISORY + SMS log; must not claim "sent" unless the provider confirms it |
+| Staff **Add stock**, new item (`#/staff/relief`) | `name`, `unit`, `quantity` | **Added Nov 25.** `POST /api/relief-items` (staff only). `name` must not already exist (any case), up to 100 characters; `unit` up to 30; `quantity` 1 to 1,000,000. Answer: 201 with the item |
+| Staff **Add stock**, existing item (`#/staff/relief`) | `quantity` | **Added Nov 25.** `PATCH /api/relief-items/{id}/stock` (staff only) adds the goods received to `quantity_in_stock`. `quantity` 1 to 1,000,000. Answer: 200 with the item |
 
 ## What the pages SHOW (data the backend must return)
 
