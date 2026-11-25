@@ -17,6 +17,42 @@ class ReliefController extends Controller
         return ReliefItem::orderBy('name')->get();
     }
 
+    // adds a new kind of relief item with the quantity received
+    public function storeItem(Request $request)
+    {
+        abort_unless($request->user()->isStaff(), 403, 'Staff only.');
+
+        $data = $request->validate([
+            'name'     => 'required|string|max:100|unique:relief_items,name',
+            'unit'     => 'required|string|max:30',
+            'quantity' => 'required|integer|min:1|max:1000000',
+        ], [
+            'name.unique' => 'This item is already in the list. Choose it from the list to add stock.',
+        ]);
+
+        $item = ReliefItem::create([
+            'name'              => $data['name'],
+            'unit'              => $data['unit'],
+            'quantity_in_stock' => $data['quantity'],
+        ]);
+
+        return response()->json($item, 201);
+    }
+
+    // adds newly received goods to the stock of an item
+    public function addStock(Request $request, ReliefItem $reliefItem)
+    {
+        abort_unless($request->user()->isStaff(), 403, 'Staff only.');
+
+        $data = $request->validate([
+            'quantity' => 'required|integer|min:1|max:1000000',
+        ]);
+
+        $reliefItem->increment('quantity_in_stock', $data['quantity']);
+
+        return $reliefItem->fresh();
+    }
+
     public function distributions(Request $request)
     {
         abort_unless($request->user()->isStaff(), 403, 'Staff only.');

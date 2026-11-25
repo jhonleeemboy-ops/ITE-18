@@ -48,6 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // relief
     Route::get('/relief-items', [ReliefController::class, 'items']);
+    Route::post('/relief-items', [ReliefController::class, 'storeItem']);
+    Route::patch('/relief-items/{reliefItem}/stock', [ReliefController::class, 'addStock']);
     Route::get('/relief-distributions', [ReliefController::class, 'distributions']);
     Route::post('/relief-distributions', [ReliefController::class, 'distribute']);
 
