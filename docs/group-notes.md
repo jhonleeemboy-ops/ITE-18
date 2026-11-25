@@ -81,12 +81,13 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Tue 2026-11-25 | Paper fixes | Jhann applied most of the review fixes (names, typos, Figures 7 and 9, Table 13, 3.9, 3.10) and shared the list in the chat. Humphrey and Marc: "goods na". |
 | Tue 2026-11-25 | **Problem 3 removed** | Jhon Lee felt Problem 3 (no running record of evacuees per facility) was not really validated and removed it with its objective. Marc: the barangay probably keeps a manual record of when a facility is full, and he and Humphrey can go back to confirm. Note: the title and the system still have the evacuation center module (FR-09, FR-10, FR-26), so it now has no matching problem or objective. |
 | Tue 2026-11-25 | **Paper submitted** | Jhon Lee submitted the paper link (7:21 PM); Marc and Humphrey can still add their signatures to Appendix I in the Google Doc. Jhon Lee asked Jhann how to submit the system and whether to do it like the other group (`freehosting.dev`). Hosting still not done; due Nov 26. |
+| Tue 2026-11-25 | **Hosting: Jhon Lee on Vercel** | Jhon Lee is hosting the system himself on Vercel: the frontend is done, the backend was still being configured (8:21 PM). Jhann's InfinityFree upload package (see [handoff.md](handoff.md)) stays as a backup. |
 
 ## Still unclear
 
 - **Frontend framework:** a framework is required (instructor, Oct 22). Vue is the likely choice, but the group should confirm it. The login page has to move from plain HTML/CSS/JS to it.
 - The diagram labels the dashboard "HTML / CSS / JavaScript". It should say Vue, since a framework is required.
-- **Hosting:** the system must be online by Nov 26, so the backend and database need a host. Jhon Lee is looking at `freehosting.dev` (Nov 24); not decided yet.
+- **Hosting:** the system must be online by Nov 26. Jhon Lee is hosting it on Vercel (Nov 25: frontend done, backend in progress). The database host for Vercel isn't known yet.
 - **Name spelling:** the correct spelling is "Jhann Clevill" (confirmed 2026-10-20). The paper's title page still says "Jhan" and needs fixing.
 - System roles for Marc Joven and John Humphrey (integration, testing, SMS research, barangay data).
 - What's in the BACKEND Drive folder.
