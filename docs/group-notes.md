@@ -78,6 +78,9 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Mon 2026-11-24 | Hosting idea | Jhon Lee suggested using the same free host as another group (a `freehosting.dev` subdomain) and will look at how they did it. Not checked yet whether it runs PHP 8.3+ with MySQL. |
 | Mon 2026-11-24 | **Presentation moved** | The scheduling sheet now says our slot moved from Dec 7 (3:00–4:30 PM) to **Dec 14, 2026, 4:30–6:00 PM**. Jhon Lee: the instructor had said Dec 10 in the group chat, but the sheet was updated again. |
 | Tue 2026-11-25 | **Appendix I + final check** | Jhon Lee filled in Appendix I (role, tasks, 25% share each) and asked everyone to sign it and check the whole document. Once all agree it's OK, the group submits the paper and starts the PPT. |
+| Tue 2026-11-25 | Paper fixes | Jhann applied most of the review fixes (names, typos, Figures 7 and 9, Table 13, 3.9, 3.10) and shared the list in the chat. Humphrey and Marc: "goods na". |
+| Tue 2026-11-25 | **Problem 3 removed** | Jhon Lee felt Problem 3 (no running record of evacuees per facility) was not really validated and removed it with its objective. Marc: the barangay probably keeps a manual record of when a facility is full, and he and Humphrey can go back to confirm. Note: the title and the system still have the evacuation center module (FR-09, FR-10, FR-26), so it now has no matching problem or objective. |
+| Tue 2026-11-25 | **Paper submitted** | Jhon Lee submitted the paper link (7:21 PM); Marc and Humphrey can still add their signatures to Appendix I in the Google Doc. Jhon Lee asked Jhann how to submit the system and whether to do it like the other group (`freehosting.dev`). Hosting still not done; due Nov 26. |
 
 ## Still unclear
 
