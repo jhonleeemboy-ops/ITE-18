@@ -79,7 +79,7 @@ Demo accounts (password `password123`): staff `staff@brgy.test`, admin `admin@br
 
 ## Next tasks (in order)
 
-1. Group: decide **hosting** (link due Nov 26; the host needs PHP 8.3 with OPcache, MySQL, and a way to run `php artisan migrate --seed` or import the database). Jhon Lee is looking at `freehosting.dev`, which another group uses (Nov 24).
+1. Group: decide **hosting** (link due Nov 26; the host needs PHP 8.3 with OPcache, MySQL, and a way to run `php artisan migrate --seed` or import the database). Jhon Lee is looking at `freehosting.dev`, which another group uses (Nov 24). **Upload package ready (Nov 25)** on Jhann's desktop ("Disaster Ready hosting": site zip, database SQL, steps), tested locally: sign-in, resident home and staff dashboard work from one address. It differs from the repo in three small ways: the website is built into `public/` with `VITE_API_URL=/api`; `routes/web.php` serves `public/index.html` at `/`; `public/.htaccess` adds `DirectoryIndex index.html index.php`, and a root `.htaccess` sends requests into `public/` on hosts where the website folder can't be changed. Packages installed with `composer install --no-dev`.
 2. Paper (Ch 1–3 only): remove the empty "CHAPTER 5" from the Google Doc; put the final test results and bug log in Appendix F; screenshots go in 3.5 (Figure 6 onward).
 3. Fill the blanks in the Google Doc's Ch 3 (sprint dates, Figures 2–5, licences, consent, "not deployed" sentence, name spelling "Jhann").
 4. Barangay feedback on household input: details still unclear. (Back/home: done. The admin notification was only in the Figma prototype.)
