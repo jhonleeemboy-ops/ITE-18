@@ -84,6 +84,7 @@ First names only, because this repo is public. Full names are on the paper's tit
 | Tue 2026-11-25 | **Hosting: Jhon Lee on Vercel** | Jhon Lee is hosting the system himself on Vercel: the frontend is done, the backend was still being configured (8:21 PM). Jhann's InfinityFree upload package (see [handoff.md](handoff.md)) stays as a backup. |
 | Tue 2026-11-25 | Signatures; doc access | All four signatures are in Appendix I (Marc added his through a comment, 8:48 PM). Jhon Lee then limited access to the Google Doc so other groups can't change it. Marc's Google name is "Marc Joven Gauran", but the title page and Table 4 still say "Guaran". |
 | Tue 2026-11-25 | **Declaration of AI use** | Jhann pointed out that the paper still has no Declaration of Use of Tools (the rubric asks for it). Jhon Lee agreed to add it and asked Jhann to do it while he works on hosting. Jhon Lee used Claude Code and ChatGPT for the document. Still to ask: Marc's and Humphrey's tools, if any. |
+| Tue 2026-11-25 | Declaration added; "missing functionality" | Jhann added the Declaration to the Google Doc with Jhon Lee's row (11:17 PM) and asked Marc and Humphrey to fill in their AI tools. Jhon Lee then said the system is missing some functionality; which one wasn't said yet. |
 
 ## Still unclear
 
